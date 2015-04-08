@@ -15,23 +15,24 @@ import javax.swing.*;
 
 public class Frame extends JFrame{
 	private PuzzlePanel p;
-	private JPanel t;
-	private Instructions i;
+	private JPanel toolbar;
+	private Instructions i; //add = new Instructions()
 
 	public Frame(){ //take in anything?
 
 		JFrame frame = new JFrame();
 
 		frame.getContentPane().setPreferredSize(new Dimension(500, 500));
+		frame.setMinimumSize(new Dimension(500, 550));
 		frame.pack();
 		frame.setTitle("Puzzle");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		PuzzlePanel p = new PuzzlePanel(); 
 
-		JPanel t = new JPanel();
 		
-		
+		JPanel toolbar = new JPanel();
+
 		JButton reset = new JButton("Reset");	
 		JButton instructions = new JButton("Instructions");
 		JButton solve = new JButton("Solve");
@@ -45,17 +46,15 @@ public class Frame extends JFrame{
 		ActionListener forInstructions = new InstructionsButtonListener(i);
 		instructions.addActionListener(forInstructions);
 
-		t.add(reset);
-		t.add(instructions);
-		t.add(solve);
+		toolbar.add(reset);
+		toolbar.add(instructions);
+		toolbar.add(solve);
 
 
 
 		frame.setLayout(new BorderLayout()); //best layout?
-		frame.add(t, BorderLayout.NORTH);
-		frame.add(p, BorderLayout.CENTER);
-
-
+		frame.getContentPane().add(toolbar, BorderLayout.NORTH);
+		frame.getContentPane().add(p, BorderLayout.CENTER);
 
 
 		frame.setVisible(true);
