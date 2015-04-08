@@ -1,16 +1,16 @@
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JToolBar;
 
+public class Toolbar extends JPanel {
+	private Instructions i = new Instructions();
 
-public class Toolbar extends JPanel{
-	private Instructions i= new Instructions();
-	
-	public Toolbar(){ 
+	public Toolbar() {
 		super(new BorderLayout());
 		JToolBar toolBar = new JToolBar("Toolbar");
 		addButtons(toolBar);
@@ -20,7 +20,7 @@ public class Toolbar extends JPanel{
 	}
 
 	protected void addButtons(JToolBar toolBar) {
-		JButton reset = new JButton("Reset");	
+		JButton reset = new JButton("Reset");
 		JButton instructions = new JButton("Instructions");
 		JButton solve = new JButton("Solve");
 
@@ -37,70 +37,68 @@ public class Toolbar extends JPanel{
 		toolBar.add(instructions);
 		toolBar.add(solve);
 
-
-	}
-
-	
-	/*
-		This class dictates the actions of the "reset" button and constructs the listener
-	 */
-	class ResetButtonListener implements ActionListener{
-		private PuzzlePanel pan; //idk if this stuff is right???
-
-		//constructs a "reset" button listener
-		public ResetButtonListener(PuzzlePanel pan1){
-			pan = pan1;
-		}
-
-		//displays blank puzzle after "reset" button is pressed:
-		public void actionPerformed(ActionEvent event){
-			pan.restart(); 
-		}
 	}
 
 	/*
-		This class dictates the actions of the "solve" button and constructs the listener
+	 * This class dictates the actions of the "reset" button and constructs the
+	 * listener
 	 */
-	class SolveButtonListener implements ActionListener{
-		private PuzzlePanel pan; //idk if this stuff is right???
+	class ResetButtonListener implements ActionListener {
+		private PuzzlePanel pan; // idk if this stuff is right???
 
-		//constructs a "solve" button listener
-		public SolveButtonListener(PuzzlePanel pan1){
+		// constructs a "reset" button listener
+		public ResetButtonListener(PuzzlePanel pan1) {
 			pan = pan1;
 		}
 
-		//displays solved puzzle after "solve" button is pressed:
-		public void actionPerformed(ActionEvent event){
+		// displays blank puzzle after "reset" button is pressed:
+		public void actionPerformed(ActionEvent event) {
+			pan.restart();
+		}
+	}
+
+	/*
+	 * This class dictates the actions of the "solve" button and constructs the
+	 * listener
+	 */
+	class SolveButtonListener implements ActionListener {
+		private PuzzlePanel pan; // idk if this stuff is right???
+
+		// constructs a "solve" button listener
+		public SolveButtonListener(PuzzlePanel pan1) {
+			pan = pan1;
+		}
+
+		// displays solved puzzle after "solve" button is pressed:
+		public void actionPerformed(ActionEvent event) {
 			pan.solve();
 		}
 	}
 
 	/*
-	This class dictates the actions of the "instructions" button and constructs the listener
+	 * This class dictates the actions of the "instructions" button and
+	 * constructs the listener
 	 */
-	class InstructionsButtonListener implements ActionListener{
+	class InstructionsButtonListener implements ActionListener {
 		private Instructions instructions;
-		//constructs an "instructions" button listener
-		public InstructionsButtonListener(Instructions instructions){
+
+		// constructs an "instructions" button listener
+		public InstructionsButtonListener(Instructions instructions) {
 			this.instructions = instructions;
 		}
 
-		//displays instructions after "instructions" button is pressed:
-		public void actionPerformed(ActionEvent event){
-			instructions.display(); //I MADE THIS UP CHANGE LATERRRR
-			
+		// displays instructions after "instructions" button is pressed:
+		public void actionPerformed(ActionEvent event) {
+			instructions.display(); // I MADE THIS UP CHANGE LATERRRR
+
 		}
 	}
 
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		PuzzlePanel p = new PuzzlePanel();
 		Instructions i = new Instructions();
-		Toolbar t = new Toolbar(p,i);
-
-
+		Toolbar t = new Toolbar(p, i);
 
 	}
-
-
 
 }

@@ -1,3 +1,5 @@
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelEvent;
@@ -20,9 +22,13 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 		
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public void paintComponent(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g;
+		for (int i = 0; i < pu.getRows(); i++) {
+			for (int j = 0; j < pu.getCols(); j++) {
 
+			}
+		}
 	}
 
 	@Override
