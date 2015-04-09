@@ -7,7 +7,10 @@ import java.awt.event.MouseWheelListener;
 
 import javax.swing.JPanel;
 
+<<<<<<< HEAD
 @SuppressWarnings("serial")
+=======
+>>>>>>> origin/master
 public class PuzzlePanel extends JPanel implements MouseListener,
 		MouseWheelListener {
 	Puzzle pu;
@@ -19,8 +22,13 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	}
 
 	public void reset() {
+<<<<<<< HEAD
 		pu.restart();
 
+=======
+		pu = new Puzzle(int row, int col, pieces);
+		
+>>>>>>> origin/master
 	}
 
 	public void paintComponent(Graphics g) {
