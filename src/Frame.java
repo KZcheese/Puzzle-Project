@@ -7,6 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/*			"GUI made by Robert Colley, Kevin Zhan, and Amy Lui." + "/n" +
+			"Puzzel Engine created by ___________ and ____________." + "/n" +
+			"Click and drag a piece to move it into the puzzle." + "/n" +
+			"Release to place that piece in the puzzle" + "/n" +
+			"While the mouse is hovering over the piece, scrolling the mouse wheel will cause the piece to rotate."+ "/n" +
+			"A piece that does not fit will remain attacked to the mouse until it goes outside the board or in a place where it fits.";
+*/
 //add PuzzlePanel, Toolbar
 //Toolbar:  solve button, Instructions button, reset button
 
