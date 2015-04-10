@@ -1,0 +1,24 @@
+import java.awt.*;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+
+public class Instructions extends JFrame {
+	private JFrame i;
+	public Instructions(){
+		
+		JOptionPane.showMessageDialog(i,
+			    "Instructions: \nUsing your mouse, drag pieces of the puzzle onto the puzzle board.\n"
+			    + "Use the scroll wheel to rotate the piece. etc im not sure what else to put here");
+
+	}
+
+
+
+	public static void main (String[]args){
+		Instructions i = new Instructions();
+	}
+}
+
