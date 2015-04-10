@@ -7,8 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-/*			"GUI made by Robert Colley, Kevin Zhan, and Amy Lui." + "/n" +
-			"Puzzel Engine created by ___________ and ____________." + "/n" +
+/*			"GUI made by Robert Colley, Kevin Zhan, and Amy Liu." + "/n" +
+			"Puzzle Engine created by ___________ and ____________." + "/n" +
 			"Click and drag a piece to move it into the puzzle." + "/n" +
 			"Release to place that piece in the puzzle" + "/n" +
 			"While the mouse is hovering over the piece, scrolling the mouse wheel will cause the piece to rotate."+ "/n" +
@@ -53,7 +53,7 @@ public class Frame extends JFrame {
 		ActionListener forReset = new ResetButtonListener(p);
 		reset.addActionListener(forReset);
 
-		ActionListener forInstructions = new InstructionsButtonListener(i);
+		ActionListener forInstructions = new InstructionsButtonListener(frame);
 		instructions.addActionListener(forInstructions);
 
 		toolbar.add(reset);
@@ -118,22 +118,24 @@ public class Frame extends JFrame {
 	 * constructs the listener
 	 */
 	class InstructionsButtonListener implements ActionListener {
-		private Instructions instructions;
+	private JFrame f;
 
 		// constructs an "instructions" button listener
-		public InstructionsButtonListener(Instructions instructions) {
-			this.instructions = instructions;
+		public InstructionsButtonListener(JFrame f) {
+			this.f = f;
 		}
 
 		// displays instructions after "instructions" button is pressed:
 		public void actionPerformed(ActionEvent event) {
-			instructions.display(); // I MADE THIS UP CHANGE LATERRRR
-
+			JOptionPane.showMessageDialog(f,
+				    "Instructions: \nClick and drag a piece to move it into the puzzle.\n" +
+			"Release to place that piece in the puzzle.\n" +
+			"While the mouse is hovering over the piece, scrolling the mouse wheel\nwill cause the piece to rotate.\n" +
+			"A piece that does not fit will remain attached to the mouse\nuntil it goes outside the board or in a place where it fits.");
 		}
 	}
-
 	public static void main(String[] args) {
-		Frame d = new Frame();
+		Frame f = new Frame();
 
 	}
 }
