@@ -20,9 +20,8 @@ import javax.swing.JPanel;
 public class Frame extends JFrame {
 	private PuzzlePanel p;
 	private JPanel toolbar;
-	private Instructions i; //add = new Instructions()
 
-	public Frame() { // take in anything?
+	public Frame() { 
 
 		JFrame frame = new JFrame();
 
@@ -126,14 +125,20 @@ public class Frame extends JFrame {
 		}
 
 		// displays instructions after "instructions" button is pressed:
-		public void actionPerformed(ActionEvent event) {
+			public void actionPerformed(ActionEvent event) {
 			JOptionPane.showMessageDialog(f,
-				    "Instructions: \nClick and drag a piece to move it into the puzzle.\n" +
+				    "Click and drag a piece to move it into the puzzle.\n" +
 			"Release to place that piece in the puzzle.\n" +
-			"While the mouse is hovering over the piece, scrolling the mouse wheel\nwill cause the piece to rotate.\n" +
-			"A piece that does not fit will remain attached to the mouse\nuntil it goes outside the board or in a place where it fits.");
+			"While the mouse is hovering over the piece, scrolling the mouse wheel\n"
+			+ "will cause the piece to rotate.\n" +
+			"A piece that does not fit will remain attached to the mouse\n"
+			+ "until it goes outside the board or in a place where it fits."
+			+ "\n\n\nGUI made by Robert Colley, Kevin Zhan, and Amy Liu.\n"+
+			"Puzzle Engine created by ___________ and ____________.", 
+			"Instructions",JOptionPane.PLAIN_MESSAGE);
 		}
 	}
+	
 	public static void main(String[] args) {
 		Frame f = new Frame();
 
