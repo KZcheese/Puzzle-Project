@@ -33,7 +33,8 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	public PuzzlePanel() throws IOException {
 		for (int i = 0; i < pieces.length; i++) {
 			pieceComponents[i] = new PieceComponent(pieces[i],
-					ImageIO.read(new File("/img/piece_" + (i + 1) + ".png")));
+					ImageIO.read(new File("/img/piece_" + (i + 1) + ".png")),
+					0, 0);
 
 		}
 	}

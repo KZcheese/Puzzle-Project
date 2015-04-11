@@ -2,18 +2,20 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /*			"GUI made by Robert Colley, Kevin Zhan, and Amy Liu." + "/n" +
-			"Puzzle Engine created by ___________ and ____________." + "/n" +
-			"Click and drag a piece to move it into the puzzle." + "/n" +
-			"Release to place that piece in the puzzle" + "/n" +
-			"While the mouse is hovering over the piece, scrolling the mouse wheel will cause the piece to rotate."+ "/n" +
-			"A piece that does not fit will remain attacked to the mouse until it goes outside the board or in a place where it fits.";
-*/
+ "Puzzle Engine created by ___________ and ____________." + "/n" +
+ "Click and drag a piece to move it into the puzzle." + "/n" +
+ "Release to place that piece in the puzzle" + "/n" +
+ "While the mouse is hovering over the piece, scrolling the mouse wheel will cause the piece to rotate."+ "/n" +
+ "A piece that does not fit will remain attacked to the mouse until it goes outside the board or in a place where it fits.";
+ */
 //add PuzzlePanel, Toolbar
 //Toolbar:  solve button, Instructions button, reset button
 
@@ -21,7 +23,7 @@ public class Frame extends JFrame {
 	private PuzzlePanel p;
 	private JPanel toolbar;
 
-	public Frame() { 
+	public Frame() throws IOException {
 
 		JFrame frame = new JFrame();
 
@@ -33,16 +35,11 @@ public class Frame extends JFrame {
 
 		PuzzlePanel p = new PuzzlePanel();
 
-<<<<<<< HEAD
 		JPanel t = new JPanel();
 
-		JButton reset = new JButton("Reset");
-=======
-		
 		JPanel toolbar = new JPanel();
 
-		JButton reset = new JButton("Reset");	
->>>>>>> origin/master
+		JButton reset = new JButton("Reset");
 		JButton instructions = new JButton("Instructions");
 		JButton solve = new JButton("Solve");
 
@@ -59,18 +56,13 @@ public class Frame extends JFrame {
 		toolbar.add(instructions);
 		toolbar.add(solve);
 
-<<<<<<< HEAD
 		frame.setLayout(new BorderLayout()); // best layout?
 		frame.add(t, BorderLayout.NORTH);
 		frame.add(p, BorderLayout.CENTER);
-=======
 
-
-		frame.setLayout(new BorderLayout()); //best layout?
+		frame.setLayout(new BorderLayout()); // best layout?
 		frame.getContentPane().add(toolbar, BorderLayout.NORTH);
 		frame.getContentPane().add(p, BorderLayout.CENTER);
-
->>>>>>> origin/master
 
 		frame.setVisible(true);
 
@@ -117,7 +109,7 @@ public class Frame extends JFrame {
 	 * constructs the listener
 	 */
 	class InstructionsButtonListener implements ActionListener {
-	private JFrame f;
+		private JFrame f;
 
 		// constructs an "instructions" button listener
 		public InstructionsButtonListener(JFrame f) {
@@ -125,21 +117,23 @@ public class Frame extends JFrame {
 		}
 
 		// displays instructions after "instructions" button is pressed:
-			public void actionPerformed(ActionEvent event) {
-			JOptionPane.showMessageDialog(f,
-				    "Click and drag a piece to move it into the puzzle.\n" +
-			"Release to place that piece in the puzzle.\n" +
-			"While the mouse is hovering over the piece, scrolling the mouse wheel\n"
-			+ "will cause the piece to rotate.\n" +
-			"A piece that does not fit will remain attached to the mouse\n"
-			+ "until it goes outside the board or in a place where it fits."
-			+ "\n\n\nGUI made by Robert Colley, Kevin Zhan, and Amy Liu.\n"+
-			"Puzzle Engine created by ___________ and ____________.", 
-			"Instructions",JOptionPane.PLAIN_MESSAGE);
+		public void actionPerformed(ActionEvent event) {
+			JOptionPane
+					.showMessageDialog(
+							f,
+							"Click and drag a piece to move it into the puzzle.\n"
+									+ "Release to place that piece in the puzzle.\n"
+									+ "While the mouse is hovering over the piece, scrolling the mouse wheel\n"
+									+ "will cause the piece to rotate.\n"
+									+ "A piece that does not fit will remain attached to the mouse\n"
+									+ "until it goes outside the board or in a place where it fits."
+									+ "\n\n\nGUI made by Robert Colley, Kevin Zhan, and Amy Liu.\n"
+									+ "Puzzle Engine created by ___________ and ____________.",
+							"Instructions", JOptionPane.PLAIN_MESSAGE);
 		}
 	}
-	
-	public static void main(String[] args) {
+
+	public static void main(String[] args) throws IOException {
 		Frame f = new Frame();
 
 	}
