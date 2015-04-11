@@ -25,13 +25,12 @@ public class Frame extends JFrame {
 
 	public Frame() throws IOException {
 
-		JFrame frame = new JFrame();
 
-		frame.getContentPane().setPreferredSize(new Dimension(500, 500));
-		frame.setMinimumSize(new Dimension(500, 550));
-		frame.pack();
-		frame.setTitle("Puzzle");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.getContentPane().setPreferredSize(new Dimension(500, 500));
+		this.setMinimumSize(new Dimension(500, 550));
+		this.pack();
+		this.setTitle("Puzzle");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		PuzzlePanel p = new PuzzlePanel();
 
@@ -49,22 +48,22 @@ public class Frame extends JFrame {
 		ActionListener forReset = new ResetButtonListener(p);
 		reset.addActionListener(forReset);
 
-		ActionListener forInstructions = new InstructionsButtonListener(frame);
+		ActionListener forInstructions = new InstructionsButtonListener(this);
 		instructions.addActionListener(forInstructions);
 
 		toolbar.add(reset);
 		toolbar.add(instructions);
 		toolbar.add(solve);
 
-		frame.setLayout(new BorderLayout()); // best layout?
-		frame.add(t, BorderLayout.NORTH);
-		frame.add(p, BorderLayout.CENTER);
+		this.setLayout(new BorderLayout()); // best layout?
+		this.add(t, BorderLayout.NORTH);
+		this.add(p, BorderLayout.CENTER);
 
-		frame.setLayout(new BorderLayout()); // best layout?
-		frame.getContentPane().add(toolbar, BorderLayout.NORTH);
-		frame.getContentPane().add(p, BorderLayout.CENTER);
+		this.setLayout(new BorderLayout()); // best layout?
+		this.getContentPane().add(toolbar, BorderLayout.NORTH);
+		this.getContentPane().add(p, BorderLayout.CENTER);
 
-		frame.setVisible(true);
+		this.setVisible(true);
 
 	}
 
@@ -133,7 +132,7 @@ public class Frame extends JFrame {
 		}
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		Frame f = new Frame();
 
 	}
