@@ -6,9 +6,7 @@ import java.awt.geom.AffineTransform;
 
 import javax.swing.JComponent;
 
-
-
-public class PieceComponent extends JComponent{
+public class PieceComponent extends JComponent {
 	private Piece piece;
 	private Image image;
 	private AffineTransform tx;
@@ -16,7 +14,7 @@ public class PieceComponent extends JComponent{
 	private int y;
 	private boolean attached;
 
-	public PieceComponent(Piece piece, Image image, int x, int y){
+	public PieceComponent(Piece piece, Image image, int x, int y) {
 		super();
 		this.attached = false;
 		this.x = x;
@@ -26,20 +24,22 @@ public class PieceComponent extends JComponent{
 		this.tx = new AffineTransform();
 	}
 
-	public void rotate(int numquadrants){
-		if(attached){
+	public void rotate(int numquadrants) {
+		if (attached) {
 			tx.quadrantRotate(numquadrants);
 			piece.rotate(numquadrants);
 			repaint();
 		}
 	}
 
-	public void paintComponent(Graphics g){
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(image, 0, 0, this);
-		//turns anti-aliasing on
-		RenderingHints rh = new RenderingHints(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2.drawImage(image, x, y, this);
+		// turns anti-aliasing on
+		RenderingHints rh = new RenderingHints(
+				RenderingHints.KEY_COLOR_RENDERING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setRenderingHints(rh);
 		g2.transform(tx);
 	}

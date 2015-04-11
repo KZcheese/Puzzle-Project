@@ -25,10 +25,10 @@ public class Frame extends JFrame {
 
 	public Frame() throws IOException {
 
-
-		this.getContentPane().setPreferredSize(new Dimension(500, 500));
+//		this.getContentPane().setPreferredSize(new Dimension(500, 550));
+		this.setPreferredSize(new Dimension(500,500));
 		this.setMinimumSize(new Dimension(500, 550));
-		this.pack();
+
 		this.setTitle("Puzzle");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -62,7 +62,7 @@ public class Frame extends JFrame {
 		this.setLayout(new BorderLayout()); // best layout?
 		this.getContentPane().add(toolbar, BorderLayout.NORTH);
 		this.getContentPane().add(p, BorderLayout.CENTER);
-
+		this.pack();
 		this.setVisible(true);
 
 	}
@@ -132,7 +132,7 @@ public class Frame extends JFrame {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Frame f = new Frame();
 
 	}

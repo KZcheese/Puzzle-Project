@@ -1,6 +1,5 @@
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelEvent;
@@ -31,12 +30,12 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	private PieceComponent[] pieceComponents = new PieceComponent[pieces.length];
 
 	public PuzzlePanel() throws IOException {
-		for (int i = 0; i < pieces.length; i++) {
+		for (int i = 0; i < pieces.length; i++)
 			pieceComponents[i] = new PieceComponent(pieces[i],
-					ImageIO.read(new File("/img/piece_" + (i + 1) + ".png")),
-					0, 0);
-
-		}
+					ImageIO.read(new File("img/piece_" + (i + 1) + ".png")),
+					300, 20 * i);
+		this.setVisible(true);
+		this.repaint();
 	}
 
 	public void solve() {
@@ -47,16 +46,10 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 		pu.restart();
 	}
 
-	public static void main(String[] args) throws IOException {
-		Image test = ImageIO.read(new File("/img/piece_1.png"));
-	}
-
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		for (int i = 0; i < pu.getRows(); i++) {
-			for (int j = 0; j < pu.getCols(); j++) {
-
-			}
+		for (PieceComponent p : pieceComponents) {
+			p.repaint();
 		}
 	}
 
