@@ -1,5 +1,9 @@
 public class Puzzle {
 
+	public Puzzle(int rows, int cols, Piece[] pieces) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void solve() {
 		// TODO Auto-generated method stub
 
@@ -12,12 +16,17 @@ public class Puzzle {
 
 	public int getRows() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 3;
 	}
 
 	public int getCols() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 3;
+	}
+
+	public Piece getPiece() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

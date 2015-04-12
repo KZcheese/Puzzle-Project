@@ -2,6 +2,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -21,31 +23,26 @@ import javax.swing.JPanel;
 
 public class Frame extends JFrame {
 	private PuzzlePanel p;
-	private JPanel toolbar;
+	private JPanel toolbar = new JPanel();
+	private JButton reset = new JButton("Reset");
+	private JButton instructions = new JButton("Instructions");
+	private JButton solve = new JButton("Solve");
 
 	public Frame() throws IOException {
 
-//		this.getContentPane().setPreferredSize(new Dimension(500, 550));
-		this.setPreferredSize(new Dimension(500,500));
+		// this.getContentPane().setPreferredSize(new Dimension(500, 550));
+		this.setPreferredSize(new Dimension(500, 500));
 		this.setMinimumSize(new Dimension(500, 550));
 
 		this.setTitle("Puzzle");
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		PuzzlePanel p = new PuzzlePanel();
 
-		JPanel t = new JPanel();
-
-		JPanel toolbar = new JPanel();
-
-		JButton reset = new JButton("Reset");
-		JButton instructions = new JButton("Instructions");
-		JButton solve = new JButton("Solve");
-
-		ActionListener forSolve = new SolveButtonListener(p);
+		ActionListener forSolve = new SolveButtonListener();
 		solve.addActionListener(forSolve);
 
-		ActionListener forReset = new ResetButtonListener(p);
+		ActionListener forReset = new ResetButtonListener();
 		reset.addActionListener(forReset);
 
 		ActionListener forInstructions = new InstructionsButtonListener(this);
@@ -56,10 +53,8 @@ public class Frame extends JFrame {
 		toolbar.add(solve);
 
 		this.setLayout(new BorderLayout()); // best layout?
-		this.add(t, BorderLayout.NORTH);
 		this.add(p, BorderLayout.CENTER);
 
-		this.setLayout(new BorderLayout()); // best layout?
 		this.getContentPane().add(toolbar, BorderLayout.NORTH);
 		this.getContentPane().add(p, BorderLayout.CENTER);
 		this.pack();
@@ -72,16 +67,10 @@ public class Frame extends JFrame {
 	 * listener
 	 */
 	class ResetButtonListener implements ActionListener {
-		private PuzzlePanel pan; // idk if this stuff is right???
-
-		// constructs a "reset" button listener
-		public ResetButtonListener(PuzzlePanel pan1) {
-			pan = pan1;
-		}
 
 		// displays blank puzzle after "reset" button is pressed:
 		public void actionPerformed(ActionEvent event) {
-			pan.reset();
+			p.reset();
 		}
 	}
 
@@ -90,16 +79,10 @@ public class Frame extends JFrame {
 	 * listener
 	 */
 	class SolveButtonListener implements ActionListener {
-		private PuzzlePanel pan; // idk if this stuff is right???
-
-		// constructs a "solve" button listener
-		public SolveButtonListener(PuzzlePanel pan1) {
-			pan = pan1;
-		}
 
 		// displays solved puzzle after "solve" button is pressed:
 		public void actionPerformed(ActionEvent event) {
-			pan.solve();
+			p.solve();
 		}
 	}
 
@@ -133,7 +116,6 @@ public class Frame extends JFrame {
 	}
 
 	public static void main(String[] args) throws IOException {
-		Frame f = new Frame();
-
+		new Frame();
 	}
 }
