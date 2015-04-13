@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Puzzle {
 
@@ -35,7 +36,7 @@ public class Puzzle {
 		return null;
 	}
 
-	public Piece[] getUnusedPieces() {
+	public List<Piece> getUnusedPieces() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -49,6 +50,11 @@ public class Puzzle {
 		return new Piece(col, col, col, col);
 		// TODO Auto-generated method stub
 
+	}
+
+	public boolean doesFit(int row, int col, Piece p) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
