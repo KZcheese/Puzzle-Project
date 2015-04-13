@@ -1,98 +1,64 @@
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 
-import javax.swing.JComponent;
 
-public class PieceComponent extends JComponent {
-	private Piece piece;
+public class PieceComponent extends Piece{
+	
 	private Image image;
-	private AffineTransform tx;
 	private int x;
 	private int y;
 	private boolean attached;
-	private int row = -1;
-	private int col = -1;
-
-	public int getRow() {
-		return row;
-	}
-
-	public void setRow(int row) {
-		this.row = row;
-	}
-
-	public int getCol() {
-		return col;
-	}
-
-	public Piece getPiece() {
-		return piece;
-	}
-
-	public void setCol(int col) {
-		this.col = col;
-	}
-
-	public PieceComponent(Piece piece, Image image, int x, int y) {
-		super();
-		this.attached = false;
+	
+	public PieceComponent(int north, int east, int south, int west, Image image, int x, int y){
+		super(north, east, south, west);
+		this.image = image;
 		this.x = x;
 		this.y = y;
-		this.piece = piece;
+		this.attached = false;
+	}
+	public PieceComponent(int north, int east, int south, int west, Image image){
+		super(north, east, south, west);
 		this.image = image;
-		this.tx = new AffineTransform();
+		this.x = 0;
+		this.y = 0;
+		this.attached = false;
 	}
-
-	public PieceComponent(Piece p, Image i) {
-		this(p, i, 0, 0);
+	public PieceComponent(int[] edges, Image image, int x, int y){
+		super(edges);
+		this.image = image;
+		this.x = x;
+		this.y = y;
+		this.attached = false;
 	}
-
-	public boolean isAttached() {
-		return attached;
+	public PieceComponent(Piece p, Image image, int x, int y) {
+		super(p.getEdge(Piece.NORTH), p.getEdge(Piece.EAST), p.getEdge(Piece.SOUTH), p.getEdge(Piece.WEST));
+		this.image = image;
+		this.x = x;
+		this.y = y;
+		this.attached = false;
 	}
-
-	public void setAttached(boolean attached) {
-		this.attached = attached;
+	public Image getImage() {
+		return image;
 	}
-
-	public void rotate(int numquadrants) {
-		if (attached) {
-			tx.quadrantRotate(numquadrants);
-			piece.rotate(numquadrants);
-			repaint();
-		}
+	public void setImage(Image image) {
+		this.image = image;
 	}
-
 	public int getX() {
 		return x;
 	}
-
 	public void setX(int x) {
 		this.x = x;
 	}
-
 	public int getY() {
 		return y;
 	}
-
 	public void setY(int y) {
 		this.y = y;
 	}
-
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		// System.out.println("piecepaint");
-		Graphics2D g2 = (Graphics2D) g;
-		// turns anti-aliasing on
-		RenderingHints rh = new RenderingHints(
-				RenderingHints.KEY_COLOR_RENDERING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
-		g2.setRenderingHints(rh);
-		g2.transform(tx);
-		g2.drawImage(image, x, y, this);
+	public boolean isAttached() {
+		return attached;
+	}
+	public void setAttached(boolean attached) {
+		this.attached = attached;
 	}
 }
