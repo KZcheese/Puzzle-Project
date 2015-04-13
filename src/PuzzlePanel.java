@@ -2,6 +2,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.io.File;
@@ -13,7 +14,7 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class PuzzlePanel extends JPanel implements MouseListener,
-		MouseWheelListener {
+		MouseMotionListener, MouseWheelListener {
 	private static final int H_OUT = Piece.HEARTS_OUT, H_IN = Piece.HEARTS_IN,
 			C_OUT = Piece.CLUBS_OUT, C_IN = Piece.CLUBS_IN,
 			D_IN = Piece.DIAMONDS_IN, D_OUT = Piece.DIAMONDS_OUT,
@@ -31,13 +32,17 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 			new Piece(C_OUT, C_IN, D_IN, D_OUT) };
 
 	private ArrayList<PieceComponent> unusedPieceComponents = new ArrayList<PieceComponent>();
-	private ArrayList<PieceComponent> usedPieceComponenets = new ArrayList<PieceComponent>();
+	private ArrayList<PieceComponent> usedPieceComponents = new ArrayList<PieceComponent>();
 
 	public PuzzlePanel() throws IOException {
-		for (int i = 0; i < pieces.length; i++)
-			unusedPieceComponents.add(new PieceComponent(pieces[i], ImageIO
-					.read(new File("img/piece_" + (i + 1) + ".png"))));
+		for (int i = 0; i < pieces.length; i++) {
+			PieceComponent p = new PieceComponent(pieces[i],
+					ImageIO.read(new File("img/piece_" + (i + 1) + ".png")));
+			unusedPieceComponents.add(p);
+		}
 		pu = new Puzzle(3, 3, pieces);
+		this.addMouseListener(this);
+		this.addMouseMotionListener(this);
 		this.setVisible(true);
 		repaint();
 	}
@@ -57,8 +62,8 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 		for (int i = 0; i < pu.getCols(); i++) {
 			for (int j = 0; j < pu.getRows(); j++) {
 				// if (pu.getPiece() == null)
-				System.out.println((i - pu.getCols() / 2 - 50) * PIECE_SIZE
-						+ getWidth() / 2);
+				// System.out.println((i - pu.getCols() / 2 - 50) * PIECE_SIZE
+				// + getWidth() / 2);
 				g2d.drawRect((i - pu.getRows() / 2) * PIECE_SIZE + getWidth()
 						/ 2 - 50, (j - pu.getCols() / 2) * PIECE_SIZE
 						+ getHeight() / 2 - 50, PIECE_SIZE, PIECE_SIZE);
@@ -66,39 +71,103 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 		}
 		for (int i = 0; i < unusedPieceComponents.size(); i++) {
 			PieceComponent p = unusedPieceComponents.get(i);
-			p.setX((int) ((i - unusedPieceComponents.size() / 2) * PIECE_SIZE
-					* 0.6 + getWidth() / 2 - 50));
-			p.setY((int) (PIECE_SIZE + getHeight() * 0.6));
+			if (!p.isAttached()) {
+				p.setX((int) ((i - unusedPieceComponents.size() / 2)
+						* PIECE_SIZE * 0.6 + getWidth() / 2 - 50));
+				p.setY((int) (PIECE_SIZE + getHeight() * 0.6));
+			}
 			p.paintComponent(g2d);
 		}
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
+	public void mouseClicked(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
+	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
+	public void mousePressed(MouseEvent e) {
+		// System.out.println("pressed");
+		int x = e.getX();
+		int y = e.getY();
+		ArrayList<Integer> chosen = new ArrayList<Integer>();
+		// System.out.println(x);
+		// System.out.println(y);
+		for (int i = 0; i < unusedPieceComponents.size(); i++) {
+			PieceComponent p = unusedPieceComponents.get(i);
+			if (x > p.getX() && x < p.getX() + PIECE_SIZE && y > p.getY()
+					&& y < p.getY() + PIECE_SIZE) {
+				p.setAttached(true);
+				chosen.add(i);
+			}
+		}
+		while (chosen.size() > 1) {
+			unusedPieceComponents.get(chosen.get(0)).setAttached(false);
+			chosen.remove(0);
+		}
+		for (PieceComponent p : usedPieceComponents)
+			if (x > p.getX() && x < p.getX() + PIECE_SIZE && y > p.getY()
+					&& y < p.getY() + PIECE_SIZE)
+				p.setAttached(true);
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
+	public void mouseReleased(MouseEvent e) {
+		// System.out.println("pressed");
+		int x = e.getX();
+		int y = e.getY();
+		// System.out.println(x);
+		// System.out.println(y);
+		for (PieceComponent p : unusedPieceComponents)
+			if (x > p.getX() && x < p.getX() + PIECE_SIZE && y > p.getY()
+					&& y < p.getY() + PIECE_SIZE)
+				p.setAttached(false);
+		for (PieceComponent p : usedPieceComponents)
+			if (x > p.getX() && x < p.getX() + PIECE_SIZE && y > p.getY()
+					&& y < p.getY() + PIECE_SIZE)
+				p.setAttached(false);
+		repaint();
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
+	public void mouseDragged(MouseEvent e) {
+
+		int x = e.getX();
+		int y = e.getY();
+		// System.out.println(x);
+		// System.out.println(y);
+		for (PieceComponent p : unusedPieceComponents) {
+			if (p.isAttached()) {
+//				System.out.println(p.getX());
+				p.setX(x - (int) (PIECE_SIZE * 0.8));
+//				System.out.println(p.getX());
+				p.setY(y - (int) (PIECE_SIZE * 0.8));
+			}
+		}
+		for (PieceComponent p : usedPieceComponents)
+			if (p.isAttached()) {
+				System.out.println(p.getX());
+				p.setX(x - PIECE_SIZE / 2);
+				System.out.println(p.getX());
+				p.setY(y - PIECE_SIZE / 2);
+			}
+		repaint();
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}

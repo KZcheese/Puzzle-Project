@@ -28,6 +28,14 @@ public class PieceComponent extends JComponent {
 		this(p, i, 0, 0);
 	}
 
+	public boolean isAttached() {
+		return attached;
+	}
+
+	public void setAttached(boolean attached) {
+		this.attached = attached;
+	}
+
 	public void rotate(int numquadrants) {
 		if (attached) {
 			tx.quadrantRotate(numquadrants);
@@ -62,7 +70,7 @@ public class PieceComponent extends JComponent {
 				RenderingHints.KEY_COLOR_RENDERING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setRenderingHints(rh);
-		// g2.transform(tx);
+		g2.transform(tx);
 		g2.drawImage(image, x, y, this);
 	}
 }
