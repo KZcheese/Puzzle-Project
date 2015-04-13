@@ -22,26 +22,35 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 			S_IN = Piece.SPADES_IN, S_OUT = Piece.SPADES_OUT;
 	private static final int PIECE_SIZE = 70;
 	private Puzzle pu;
-	private Piece[] pieces = { new Piece(C_OUT, H_OUT, D_IN, S_IN),
-			new Piece(S_OUT, D_OUT, S_IN, H_IN),
-			new Piece(H_OUT, S_OUT, S_IN, C_OUT),
-			new Piece(H_OUT, D_OUT, S_IN, S_IN),
-			new Piece(S_OUT, S_OUT, H_IN, S_IN),
-			new Piece(H_OUT, D_OUT, D_IN, H_IN),
-			new Piece(S_OUT, D_OUT, H_IN, D_IN),
-			new Piece(C_OUT, H_OUT, S_IN, H_IN),
-			new Piece(C_OUT, C_IN, D_IN, D_OUT) };
+	private PieceComponent[] pieces = {
+			new PieceComponent(C_OUT, H_OUT, D_IN, S_IN, ImageIO.read(new File(
+					"img/piece_1.png"))),
+			new PieceComponent(S_OUT, D_OUT, S_IN, H_IN, ImageIO.read(new File(
+					"img/piece_2.png"))),
+			new PieceComponent(H_OUT, S_OUT, S_IN, C_OUT,
+					ImageIO.read(new File("img/piece_3.png"))),
+			new PieceComponent(H_OUT, D_OUT, S_IN, S_IN, ImageIO.read(new File(
+					"img/piece_4.png"))),
+			new PieceComponent(S_OUT, S_OUT, H_IN, S_IN, ImageIO.read(new File(
+					"img/piece_5.png"))),
+			new PieceComponent(H_OUT, D_OUT, D_IN, H_IN, ImageIO.read(new File(
+					"img/piece_6.png"))),
+			new PieceComponent(S_OUT, D_OUT, H_IN, D_IN, ImageIO.read(new File(
+					"img/piece_7.png"))),
+			new PieceComponent(C_OUT, H_OUT, S_IN, H_IN, ImageIO.read(new File(
+					"img/piece_8.png"))),
+			new PieceComponent(C_OUT, C_IN, D_IN, D_OUT, ImageIO.read(new File(
+					"img/piece_9.png"))) };
 
 	private ArrayList<PieceComponent> unusedPieceComponents = new ArrayList<PieceComponent>();
 	private ArrayList<PieceComponent> usedPieceComponents = new ArrayList<PieceComponent>();
 
 	public PuzzlePanel() throws IOException {
+		ArrayList<Piece> temp = new ArrayList<Piece>();
 		for (int i = 0; i < pieces.length; i++) {
-			PieceComponent p = new PieceComponent(pieces[i],
-					ImageIO.read(new File("img/piece_" + (i + 1) + ".png")));
-			unusedPieceComponents.add(p);
+			temp.add((Piece) pieces[i]);
 		}
-		pu = new Puzzle(3, 3, pieces);
+		pu = new Puzzle(3, 3, temp);
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
 		this.addMouseWheelListener(this);
@@ -116,7 +125,8 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if(isSolved) return;
+		if (isSolved)
+			return;
 		// System.out.println("pressed");
 		int x = e.getX();
 		int y = e.getY();
@@ -143,7 +153,8 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if(isSolved) return;
+		if (isSolved)
+			return;
 
 		// System.out.println("pressed");
 		int x = e.getX();
@@ -226,7 +237,8 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		if(isSolved) return;
+		if (isSolved)
+			return;
 
 		int x = e.getX();
 		int y = e.getY();
@@ -252,14 +264,15 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		
+
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		if(isSolved) return;
+		if (isSolved)
+			return;
 
 		System.out.println("rotate");
 		int rotated = e.getWheelRotation();

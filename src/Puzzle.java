@@ -1,6 +1,12 @@
+import java.util.ArrayList;
+
 public class Puzzle {
 
 	public Puzzle(int rows, int cols, Piece[] pieces) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Puzzle(int rows, int cols, ArrayList<Piece> temp) {
 		// TODO Auto-generated constructor stub
 	}
 
