@@ -261,7 +261,7 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		if(isSolved) return;
 
-		System.out.println("rotate");
+//		System.out.println("rotate");
 		int rotated = e.getWheelRotation();
 		for (PieceComponent p : unusedPieceComponents)
 			if (p.isAttached())

@@ -59,11 +59,9 @@ public class PieceComponent extends JComponent {
 	}
 
 	public void rotate(int numquadrants) {
-		if (attached) {
 			tx.quadrantRotate(numquadrants);
 			piece.rotate(numquadrants);
 			repaint();
-		}
 	}
 
 	public int getX() {
