@@ -24,9 +24,25 @@ public class Puzzle {
 		return 3;
 	}
 
-	public Piece getPiece() {
+	public Piece getPiece(int row, int col) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public Piece[] getUnusedPieces() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Piece setPiece(int j, int i, Piece piece) {
+		// TODO Auto-generated method stub
+		return new Piece(i, i, i, i);
+	}
+
+	public Piece removePiece(int row, int col) {
+		return new Piece(col, col, col, col);
+		// TODO Auto-generated method stub
+
 	}
 
 }

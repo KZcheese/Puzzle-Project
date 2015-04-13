@@ -13,6 +13,28 @@ public class PieceComponent extends JComponent {
 	private int x;
 	private int y;
 	private boolean attached;
+	private int row = -1;
+	private int col = -1;
+
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public int getCol() {
+		return col;
+	}
+
+	public Piece getPiece() {
+		return piece;
+	}
+
+	public void setCol(int col) {
+		this.col = col;
+	}
 
 	public PieceComponent(Piece piece, Image image, int x, int y) {
 		super();

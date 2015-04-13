@@ -70,7 +70,12 @@ public class Frame extends JFrame {
 
 		// displays blank puzzle after "reset" button is pressed:
 		public void actionPerformed(ActionEvent event) {
-			p.reset();
+			try {
+				p.reset();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
