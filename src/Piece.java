@@ -44,6 +44,7 @@ public class Piece {
 		return sides[direction];
 	}
 	
+	
 	public void rotate(){
 		orientation += 1;
 		int newNorth = sides[WEST];

@@ -29,41 +29,42 @@ public class Board {
 	}
 
 	public Piece setPiece(int row, int col, Piece piece){
-		Piece old = board[row-1][col-1];
-		board[row-1][col-1] = piece;
+		Piece old = board[row][col];
+		board[row][col] = piece;
 		return old;
 	}
 
 	public Piece removePiece(int row, int col){
-		Piece a = board[row-1][col-1];
-		board[row-1][col-1] = null;
+		Piece a = board[row][col];
+		board[row][col] = null;
 		return a;
 	}
 
 	public Piece getPiece(int row, int col){
-		return board[row-1][col-1];
+		return board[row][col];
 	}
 
 	public boolean hasPiece(int row, int col){
-		if(board[row-1][col-1] == null) return false;
+		if(board[row][col] == null) return false;
 		return true;
 	}
 
 
 	public boolean isValid(int row, int col){
 		if(row > 0 && col > 0)
-			if(row-1 <= rows && col-1 <= cols) 
+			if(row < rows && col < cols) 
 				return true; 
 		return false;
 	}
 
 	public void clear(){
-		for(int i = 0; i < board.length; i++){
-			for(int j = 0; j < board[0].length; j++){
-				board[i][j] = null;
-
-			}
-		}
+//		for(int i = 0; i < board.length; i++){
+//			for(int j = 0; j < board[0].length; j++){
+//				board[i][j] = null;
+//
+//			}
+//		}
+		board = new Piece[rows][cols];
 	}
 
 	public String toString(){
