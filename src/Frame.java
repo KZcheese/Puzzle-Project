@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 //Toolbar:  solve button, Instructions button, reset button
 
 public class Frame extends JFrame {
-	private PuzzlePanel p;
+	private PuzzlePanel p = new PuzzlePanel();
 	private JPanel toolbar = new JPanel();
 	private JButton reset = new JButton("Reset");
 	private JButton instructions = new JButton("Instructions");
@@ -37,7 +37,7 @@ public class Frame extends JFrame {
 		this.setTitle("Puzzle");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		PuzzlePanel p = new PuzzlePanel();
+//		PuzzlePanel p = new PuzzlePanel();
 
 		ActionListener forSolve = new SolveButtonListener();
 		solve.addActionListener(forSolve);
