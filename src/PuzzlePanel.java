@@ -108,13 +108,19 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 						* PIECE_SIZE * 0.6 + getWidth() / 2 - 50));
 				p.setY((int) (PIECE_SIZE + getHeight() * 0.6));
 			}
-
+			int or = p.getOrientation();
+			if (or < 0)
+				or = 4 - or;
 			AffineTransform tx = AffineTransform.getQuadrantRotateInstance(p
 					.getOrientation());
+
 			AffineTransformOp op = new AffineTransformOp(tx,
 					AffineTransformOp.TYPE_BICUBIC);
-			g2d.drawImage(op.filter((BufferedImage) p.getImage(), null),
-					p.getX(), p.getY(), null);
+
+			g2d.drawImage(op.filter(p.getImage(), null), p.getX(), p.getY(),
+					null);
+			System.out.println(p.getImage().getWidth());
+			System.out.println(p.getOrientation());
 			// g2d.drawImage(p.getImage(), p.getX(), p.getY(), null);
 		}
 		for (int i = 0; i < usedPieceComponents.size(); i++) {
@@ -124,8 +130,8 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 			AffineTransformOp op = new AffineTransformOp(tx,
 					AffineTransformOp.TYPE_BICUBIC);
 			// g2d.drawImage(p.getImage(), p.getX(), p.getY(), null);
-			g2d.drawImage(op.filter((BufferedImage) p.getImage(), null),
-					p.getX(), p.getY(), null);
+			g2d.drawImage(op.filter(p.getImage(), null), p.getX(), p.getY(),
+					null);
 		}
 	}
 
@@ -312,7 +318,7 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 			return;
 		// System.out.println("rotate");
 		int rotated = e.getWheelRotation();
-		System.out.println(rotated);
+		// System.out.println(rotated);
 		for (PieceComponent p : unusedPieceComponents)
 			if (p.isAttached())
 				p.rotate(rotated);

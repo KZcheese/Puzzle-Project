@@ -58,10 +58,10 @@ public class Piece {
 
 	public void rotate(int rotations) {
 		if (rotations > 0)
-			for (int i = 1; i <= rotations; i++)
+			for (int i = 0; i < rotations; i++)
 				rotate();
 		else
-			for (int i = 1; i <= rotations; i++)
+			for (int i = 0; i < rotations; i++)
 				rotateBackward();
 	}
 

@@ -1,15 +1,15 @@
 import java.awt.Image;
-import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 
 public class PieceComponent extends Piece {
 
-	private Image image;
+	private BufferedImage image;
 	private int x;
 	private int y;
 	private boolean attached;
 
 	public PieceComponent(int north, int east, int south, int west,
-			Image image, int x, int y) {
+			BufferedImage image, int x, int y) {
 		super(north, east, south, west);
 		this.image = image;
 		this.x = x;
@@ -17,7 +17,7 @@ public class PieceComponent extends Piece {
 		this.attached = false;
 	}
 
-	public PieceComponent(int north, int east, int south, int west, Image image) {
+	public PieceComponent(int north, int east, int south, int west, BufferedImage image) {
 		super(north, east, south, west);
 		this.image = image;
 		this.x = 0;
@@ -25,7 +25,7 @@ public class PieceComponent extends Piece {
 		this.attached = false;
 	}
 
-	public PieceComponent(int[] edges, Image image, int x, int y) {
+	public PieceComponent(int[] edges, BufferedImage image, int x, int y) {
 		super(edges);
 		this.image = image;
 		this.x = x;
@@ -33,7 +33,7 @@ public class PieceComponent extends Piece {
 		this.attached = false;
 	}
 
-	public PieceComponent(Piece p, Image image, int x, int y) {
+	public PieceComponent(Piece p, BufferedImage image, int x, int y) {
 		super(p.getEdge(Piece.NORTH), p.getEdge(Piece.EAST), p
 				.getEdge(Piece.SOUTH), p.getEdge(Piece.WEST));
 		this.image = image;
@@ -42,11 +42,11 @@ public class PieceComponent extends Piece {
 		this.attached = false;
 	}
 
-	public Image getImage() {
+	public BufferedImage getImage() {
 		return image;
 	}
 
-	public void setImage(Image image) {
+	public void setImage(BufferedImage image) {
 		this.image = image;
 	}
 
@@ -74,8 +74,4 @@ public class PieceComponent extends Piece {
 		this.attached = attached;
 	}
 
-	public int getOrientation() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }
