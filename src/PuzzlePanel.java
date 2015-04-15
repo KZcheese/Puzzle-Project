@@ -88,7 +88,7 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 
-		 System.out.println("puzzlepaint");
+		System.out.println("puzzlepaint");
 		for (int i = 0; i < pu.getCols(); i++) {
 			for (int j = 0; j < pu.getRows(); j++) {
 				// if (pu.getPiece() == null)
@@ -151,36 +151,36 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 		if (isSolved)
 			return;
 		// System.out.println("pressed");
-			int x = e.getX();
-			int y = e.getY();
-			ArrayList<Integer> chosen = new ArrayList<Integer>();
-			// System.out.println(x);
-			// System.out.println(y);
-			for (int i = 0; i < unusedPieceComponents.size(); i++) {
-				PieceComponent p = unusedPieceComponents.get(i);
-				if (x > p.getX() + PIECE_SIZE / 3
-						&& x < p.getX() + PIECE_SIZE * 4 / 3
-						&& y > p.getY() + PIECE_SIZE / 3
-						&& y < p.getY() + PIECE_SIZE * 4 / 3) { // made a change
-																// in
-																// calculation
-																// here
-					p.setAttached(true);
-					chosen.add(i);
-				}
+		int x = e.getX();
+		int y = e.getY();
+		ArrayList<Integer> chosen = new ArrayList<Integer>();
+		// System.out.println(x);
+		// System.out.println(y);
+		for (int i = 0; i < unusedPieceComponents.size(); i++) {
+			PieceComponent p = unusedPieceComponents.get(i);
+			if (x > p.getX() + PIECE_SIZE / 3
+					&& x < p.getX() + PIECE_SIZE * 4 / 3
+					&& y > p.getY() + PIECE_SIZE / 3
+					&& y < p.getY() + PIECE_SIZE * 4 / 3) { // made a change
+															// in
+															// calculation
+															// here
+				p.setAttached(true);
+				chosen.add(i);
 			}
-			while (chosen.size() > 1) {
-				unusedPieceComponents.get(chosen.get(0)).setAttached(false);
-				chosen.remove(0);
-			}
-			for (int j = 0; j < usedPieceComponents.size(); j++) {
-				PieceComponent p = usedPieceComponents.get(j);
-				if (x > p.getX() + PIECE_SIZE / 3
-						&& x < p.getX() + PIECE_SIZE * 4 / 3
-						&& y > p.getY() + PIECE_SIZE / 3
-						&& y < p.getY() + PIECE_SIZE * 4 / 3)
-					p.setAttached(true);
-			}
+		}
+		while (chosen.size() > 1) {
+			unusedPieceComponents.get(chosen.get(0)).setAttached(false);
+			chosen.remove(0);
+		}
+		for (int j = 0; j < usedPieceComponents.size(); j++) {
+			PieceComponent p = usedPieceComponents.get(j);
+			if (x > p.getX() + PIECE_SIZE / 3
+					&& x < p.getX() + PIECE_SIZE * 4 / 3
+					&& y > p.getY() + PIECE_SIZE / 3
+					&& y < p.getY() + PIECE_SIZE * 4 / 3)
+				p.setAttached(true);
+		}
 	}
 
 	@Override
@@ -310,7 +310,7 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		if (isSolved)
 			return;
-//		 System.out.println("rotate");
+		// System.out.println("rotate");
 		int rotated = e.getWheelRotation();
 		System.out.println(rotated);
 		for (PieceComponent p : unusedPieceComponents)
