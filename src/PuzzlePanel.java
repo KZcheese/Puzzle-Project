@@ -88,7 +88,7 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 
-		// System.out.println("puzzlepaint");
+		 System.out.println("puzzlepaint");
 		for (int i = 0; i < pu.getCols(); i++) {
 			for (int j = 0; j < pu.getRows(); j++) {
 				// if (pu.getPiece() == null)
@@ -310,7 +310,7 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		if (isSolved)
 			return;
-		 System.out.println("rotate");
+//		 System.out.println("rotate");
 		int rotated = e.getWheelRotation();
 		System.out.println(rotated);
 		for (PieceComponent p : unusedPieceComponents)
