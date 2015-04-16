@@ -46,6 +46,7 @@ public class Piece {
 		for (int i = 3; i > 0; i--)
 			sides[i] = sides[(i - 1) % 4];
 		sides[NORTH] = newNorth;
+		orientation %= 4;
 	}
 
 	private void rotateBackward() {
@@ -54,6 +55,7 @@ public class Piece {
 		for (int i = 2; i >= 0; i--)
 			sides[i] = sides[(i + 1) % 4];
 		sides[NORTH] = newNorth;
+		orientation = 4 - (orientation % 4);
 	}
 
 	public void rotate(int rotations) {
@@ -61,7 +63,7 @@ public class Piece {
 			for (int i = 0; i < rotations; i++)
 				rotate();
 		else
-			for (int i = 0; i < rotations; i++)
+			for (int i = 0; i > rotations; i--)
 				rotateBackward();
 	}
 
