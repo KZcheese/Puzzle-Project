@@ -90,3 +90,4 @@ public class Piece {
 		System.out.println(a.getOrientation());
 	}
 }
+

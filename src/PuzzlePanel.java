@@ -73,7 +73,7 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 												// unusedPieces
 		pu.restart();
 		ArrayList<Piece> temp = pu.getUnusedPieces();
-		// unusedPieceComponents = new ArrayList<PieceComponent>();
+		unusedPieceComponents = new ArrayList<PieceComponent>();
 		usedPieceComponents = new ArrayList<PieceComponent>();
 		for (int i = 0; i < temp.size(); i++) {
 			Piece p = temp.get(i);
@@ -111,7 +111,8 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 			}
 
 			AffineTransform tx = AffineTransform.getQuadrantRotateInstance(
-					p.getOrientation(), PIECE_SIZE_EDGE / 2, PIECE_SIZE_EDGE / 2);
+					p.getOrientation(), PIECE_SIZE_EDGE / 2,
+					PIECE_SIZE_EDGE / 2);
 			AffineTransformOp op = new AffineTransformOp(tx,
 					AffineTransformOp.TYPE_BILINEAR);
 			g2d.drawImage(op.filter((BufferedImage) p.getImage(), null),
@@ -121,7 +122,8 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 		for (int i = 0; i < usedPieceComponents.size(); i++) {
 			PieceComponent p = usedPieceComponents.get(i);
 			AffineTransform tx = AffineTransform.getQuadrantRotateInstance(
-					p.getOrientation(), PIECE_SIZE_EDGE / 2, PIECE_SIZE_EDGE / 2);
+					p.getOrientation(), PIECE_SIZE_EDGE / 2,
+					PIECE_SIZE_EDGE / 2);
 			AffineTransformOp op = new AffineTransformOp(tx,
 					AffineTransformOp.TYPE_BILINEAR);
 			// g2d.drawImage(p.getImage(), p.getX(), p.getY(), null);
@@ -180,7 +182,7 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 				p.setAttached(true);
 			int start = (0 - pu.getCols() / 2) * PIECE_SIZE + getWidth() / 2
 					- 50;
-			pu.removePiece((y - start) / PIECE_SIZE, (x - start) / PIECE_SIZE);
+			pu.getPiece((y - start) / PIECE_SIZE, (x - start) / PIECE_SIZE);
 			usedPieceComponents.remove(p);
 			unusedPieceComponents.add(p);
 		}
@@ -315,7 +317,7 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 			return;
 		// System.out.println("rotate");
 		int rotated = e.getWheelRotation();
-//		System.out.println(rotated);
+		// System.out.println(rotated);
 		for (PieceComponent p : unusedPieceComponents)
 			if (p.isAttached())
 				p.rotate(rotated);
