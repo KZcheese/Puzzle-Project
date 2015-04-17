@@ -50,12 +50,12 @@ public class Piece {
 	}
 
 	private void rotateBackward() {
-		orientation -= 1;
-		int newNorth = sides[EAST];
-		for (int i = 2; i >= 0; i--)
+		orientation = orientation + 3;
+		int newWest = sides[NORTH];
+		for (int i = 0; i < 3; i++)
 			sides[i] = sides[(i + 1) % 4];
-		sides[NORTH] = newNorth;
-		orientation = 4 - (orientation % 4);
+		sides[WEST] = newWest;
+		orientation %= 4;
 	}
 
 	public void rotate(int rotations) {
