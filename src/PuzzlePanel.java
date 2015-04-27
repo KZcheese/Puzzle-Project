@@ -85,7 +85,6 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -102,8 +101,10 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 				g2d.drawRect(xPos, yPos, PIECE_SIZE, PIECE_SIZE);
 				PieceComponent p = (PieceComponent) pu.getPiece(j, i);
 				if (p != null) {
-					p.setX(xPos);
-					p.setY(yPos);
+					if (!p.isAttached()) {
+						p.setX(xPos - 23);
+						p.setY(yPos - 23);
+					}
 					AffineTransform tx = AffineTransform
 							.getQuadrantRotateInstance(p.getOrientation(),
 									PIECE_SIZE_EDGE / 2, PIECE_SIZE_EDGE / 2);
@@ -176,26 +177,23 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		// System.out.println("drag");
 		int mouseX = e.getX();
 		int mouseY = e.getY();
 		for (int i = 0; i < unusedPieceComponents.size(); i++) {
 			PieceComponent p = unusedPieceComponents.get(i);
-			if (p.getX() < mouseX && p.getX() + PIECE_SIZE / 2 > mouseX
-					&& p.getY() < mouseY && p.getY() + PIECE_SIZE / 2 > mouseY) {
-				p.setAttached(true);
-				p.setX(mouseX - PIECE_SIZE / 2);
-				p.setY(mouseY - PIECE_SIZE / 2);
-				return;
+			if (p.isAttached()) {
+				p.setX(mouseX - PIECE_SIZE_EDGE / 2);
+				p.setY(mouseY - PIECE_SIZE_EDGE / 2);
+				break;
 			}
 		}
 		for (int i = 0; i < usedPieceComponents.size(); i++) {
 			PieceComponent p = usedPieceComponents.get(i);
-			if (p.getX() < mouseX && p.getX() + PIECE_SIZE / 2 > mouseX
-					&& p.getY() < mouseY && p.getY() + PIECE_SIZE / 2 > mouseY) {
-				p.setAttached(true);
-				p.setX(mouseX - PIECE_SIZE / 2);
-				p.setY(mouseY - PIECE_SIZE / 2);
-				return;
+			if (p.isAttached()) {
+				p.setX(mouseX - PIECE_SIZE_EDGE / 2);
+				p.setY(mouseY - PIECE_SIZE_EDGE / 2);
+				break;
 			}
 		}
 		repaint();
@@ -203,17 +201,33 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		System.out.println("pressed");
+		int mouseX = e.getX();
+		int mouseY = e.getY();
+		for (int i = 0; i < unusedPieceComponents.size(); i++) {
+			PieceComponent p = unusedPieceComponents.get(i);
+			if (p.getX() + 23 < mouseX && p.getX() + PIECE_SIZE > mouseX
+					&& p.getY() + 23 < mouseY && p.getY() + PIECE_SIZE > mouseY)
+				p.setAttached(true);
+		}
+		for (int i = 0; i < usedPieceComponents.size(); i++) {
+			PieceComponent p = usedPieceComponents.get(i);
+			if (p.getX() + 23 < mouseX && p.getX() + PIECE_SIZE > mouseX
+					&& p.getY() + 23 < mouseY && p.getY() + PIECE_SIZE > mouseY)
+				p.setAttached(true);
+		}
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		for (int i = 0; i < unusedPieceComponents.size(); i++) {
-			PieceComponent p = unusedPieceComponents.get(i);
+		System.out.println("released");
+		int x = e.getX();
+		int y = e.getY();
+		for (int k = 0; k < unusedPieceComponents.size(); k++) {
+			PieceComponent p = unusedPieceComponents.get(k);
 			if (p.isAttached()) {
-				int x = p.getX();
-				int y = p.getY();
+				p.setAttached(false);
 				for (int i = 0; i < pu.getCols(); i++) {
 					for (int j = 0; j < pu.getRows(); j++) {
 						int xPos = (i - pu.getCols() / 2) * PIECE_SIZE
@@ -222,21 +236,49 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 								+ getHeight() / 2 - 50;
 						if (x > xPos && x < xPos + PIECE_SIZE && y > yPos
 								&& y < yPos + PIECE_SIZE) {
+							if (pu.doesFit(i, j, p)) {
+								unusedPieceComponents.remove(p);
+								usedPieceComponents.add(p);
+							}
 							PieceComponent pTemp = (PieceComponent) pu
 									.setPiece(i, j, p);
-							if(pu.doesFit(i, j, p)){
-								
+
+							if (pTemp != null) {
+								usedPieceComponents.remove(pTemp);
+								unusedPieceComponents.add(pTemp);
 							}
+							break;
 						}
 					}
 				}
 			}
-
 		}
-		for (int i = 0; i < usedPieceComponents.size(); i++) {
-			PieceComponent p = usedPieceComponents.get(i);
-			if (p.isAttached())
-				;
+		for (int k = 0; k < usedPieceComponents.size(); k++) {
+			PieceComponent p = usedPieceComponents.get(k);
+			if (p.isAttached()) {
+				p.setAttached(false);
+				for (int i = 0; i < pu.getCols(); i++) {
+					for (int j = 0; j < pu.getRows(); j++) {
+						int xPos = (i - pu.getCols() / 2) * PIECE_SIZE
+								+ getWidth() / 2 - 50;
+						int yPos = (j - pu.getRows() / 2) * PIECE_SIZE
+								+ getHeight() / 2 - 50;
+						if (x > xPos && x < xPos + PIECE_SIZE && y > yPos
+								&& y < yPos + PIECE_SIZE) {
+							if (pu.doesFit(i, j, p)) {
+								pu.removePiece(i, j);
+							}
+							PieceComponent pTemp = (PieceComponent) pu
+									.setPiece(i, j, p);
+							if (pTemp != null) {
+								usedPieceComponents.remove(pTemp);
+								unusedPieceComponents.add(pTemp);
+							}
+							break;
+						}
+					}
+				}
+			}
 		}
 		repaint();
 	}
