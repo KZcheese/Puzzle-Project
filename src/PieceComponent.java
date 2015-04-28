@@ -1,4 +1,3 @@
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class PieceComponent extends Piece {
@@ -17,7 +16,8 @@ public class PieceComponent extends Piece {
 		this.attached = false;
 	}
 
-	public PieceComponent(int north, int east, int south, int west, BufferedImage image) {
+	public PieceComponent(int north, int east, int south, int west,
+			BufferedImage image) {
 		super(north, east, south, west);
 		this.image = image;
 		this.x = 0;
