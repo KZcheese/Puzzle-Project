@@ -70,18 +70,31 @@ public class Piece {
 		for(int i = sides.length - 1; i > 0; i--)
 			sides[i] = sides[i - 1];
 		sides[NORTH] = newNorth;
+<<<<<<< HEAD
 		orientation++; 
+=======
+		orientation %= 4;
+>>>>>>> origin/master
 	}
 	
 	/* to rotate a piece by 90 degree counterclockwise
 	 * 
 	*/
 	private void rotateBackward() {
+<<<<<<< HEAD
 		int newWest = sides[NORTH];
 		for (int i = 0; i < 3; i++)
 			sides[i] = sides[i + 1];
 		sides[WEST] = newWest;
 		orientation--;
+=======
+		orientation = orientation + 3;
+		int newWest = sides[NORTH];
+		for (int i = 0; i < 3; i++)
+			sides[i] = sides[(i + 1) % 4];
+		sides[WEST] = newWest;
+		orientation %= 4;
+>>>>>>> origin/master
 	}
 	
 	/* to rotate a piece by number of rotations
@@ -123,4 +136,7 @@ public class Piece {
 	}
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master

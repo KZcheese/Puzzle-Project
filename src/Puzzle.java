@@ -115,6 +115,7 @@ public class Puzzle {
 		}
 		return true;
 	}
+<<<<<<< HEAD
 	
 	/* to check if puzzle is solved, that is, each tile has a piece and is fitted 
 	 * returns true if solved, or false if not
@@ -136,6 +137,22 @@ public class Puzzle {
 	 */
 	public Piece setPiece(int row, int col, Piece piece){
 		if(!doesFit(row,col,piece)) return null;
+=======
+
+	public boolean isSolved() {
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++)
+				if (!doesFit(i, j, board.getPiece(i, j)))
+					return false;
+		}
+		solved = true;
+		return solved;
+	}
+
+	public Piece setPiece(int row, int col, Piece piece) {
+		if (!doesFit(row, col, piece))
+			return null;
+>>>>>>> origin/master
 		else {
 			Piece a = board.getPiece(row, col);
 			unused.remove(piece);
@@ -160,7 +177,11 @@ public class Puzzle {
 		if(!board.isValid(row, col) || !board.hasPiece(row, col)) return null;
 		Piece a = board.getPiece(row, col);
 		unused.add(board.removePiece(row, col));
+<<<<<<< HEAD
 		return a;	
+=======
+		return a;
+>>>>>>> origin/master
 	}
 
 	/* to add the piece to unused list
@@ -169,6 +190,7 @@ public class Puzzle {
 	public void addPiece(Piece piece){
 		unused.add(piece);
 	}
+<<<<<<< HEAD
 	
 	/* to remove all pieces on the board to unused list and clear the board
 	 * 
@@ -178,9 +200,30 @@ public class Puzzle {
 			for(int j = 0; j < cols; j++){
 				if(board.hasPiece(i, j))
 					unused.add(board.getPiece(i, j));
+=======
+
+	public ArrayList<Piece> getUnusedPieces() {
+		ArrayList<Piece> a = new ArrayList<Piece>();
+		for (int i = 0; i < unused.size(); i++)
+			a.add(unused.get(i));
+		return a;
+	}
+
+	public String toString() {
+		String s = "";
+		for (int i = 1; i <= board.getRows(); i++) {
+			for (int j = 1; j <= board.getCols(); j++) {
+				s += board.getPiece(i, j) + " ";
+>>>>>>> origin/master
 			}
+			s += "\n";
 		}
+<<<<<<< HEAD
 		board.clear();
+=======
+
+		return s;
+>>>>>>> origin/master
 	}
 	
 	/* a toString method to convert the puzzle board into printable string format
@@ -195,6 +238,7 @@ public class Puzzle {
 	 */
 	public void solve() {
 		restart();
+<<<<<<< HEAD
 		ArrayList<Piece> unusedPieces = getUnusedPieces();
 		permuteToSolve(unusedPieces, unusedPieces.size());
 	}
@@ -264,9 +308,39 @@ public class Puzzle {
 				col++;	
 			pieces.remove(fitPiece);
 			solve(row, col, pieces);
-		}
+=======
+		solve(0, 0);
 	}
 
+	private boolean solve(int row, int col) {
+		if (isSolved() || board.isValid(row, col) == false
+				|| board.hasPiece(row, col))
+			return true;
+		boolean a = false;
+		boolean b = false;
+		Piece[] unusedCopy = new Piece[unused.size()];
+		for (int i = 0; i < unusedCopy.length; i++)
+			unusedCopy[i] = unused.get(i);
+		for (int i = 0; i < unusedCopy.length; i++) {
+			for (int j = 0; j < 3; j++) {
+				unusedCopy[i].rotate();
+				if (doesFit(row, col, unusedCopy[i])) {
+					setPiece(row, col, unusedCopy[i]);
+					a = solve(row + 1, col);
+					b = solve(row, col + 1);
+					// System.out.println(board.toString());
+					if (a && b)
+						return true;
+				}
+				// unusedCopy[i].rotate();
+			}
+			clearBranch(row, col);
+>>>>>>> origin/master
+		}
+		return false;
+	}
+
+<<<<<<< HEAD
 /*	public void solve(){
 		restart();
 		solve(0, 0);
@@ -294,6 +368,19 @@ public class Puzzle {
 			clearBranch(row, col);
 		}
 		return false;
+=======
+	private void clearBranch(int row, int col) {
+		for (int i = row; i < rows; i++)
+			for (int j = col; j < cols; j++)
+				removePiece(i, j);
+	}
+
+	public void restart() {
+		for (int i = 0; i < rows; i++)
+			for (int j = 0; j < cols; j++)
+				if (board.hasPiece(i, j) == true)
+					removePiece(i, j);
+>>>>>>> origin/master
 	}
 	
 	private void clearBranch(int row, int col){
