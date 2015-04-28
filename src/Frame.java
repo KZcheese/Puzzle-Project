@@ -11,16 +11,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-/*			"GUI made by Robert Colley, Kevin Zhan, and Amy Liu." + "/n" +
- "Puzzle Engine created by ___________ and ____________." + "/n" +
- "Click and drag a piece to move it into the puzzle." + "/n" +
- "Release to place that piece in the puzzle" + "/n" +
- "While the mouse is hovering over the piece, scrolling the mouse wheel will cause the piece to rotate."+ "/n" +
- "A piece that does not fit will remain attacked to the mouse until it goes outside the board or in a place where it fits.";
+/**
+ * @author Kevin Zhan
+ * @author Robert Colley
+ * @author Amy Liu
  */
-//add PuzzlePanel, Toolbar
-//Toolbar:  solve button, Instructions button, reset button
-
+@SuppressWarnings("serial")
 public class Frame extends JFrame {
 	private PuzzlePanel p = new PuzzlePanel();
 	private JPanel toolbar = new JPanel();
@@ -37,7 +33,7 @@ public class Frame extends JFrame {
 		this.setTitle("Puzzle");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-//		PuzzlePanel p = new PuzzlePanel();
+		// PuzzlePanel p = new PuzzlePanel();
 
 		ActionListener forSolve = new SolveButtonListener();
 		solve.addActionListener(forSolve);
