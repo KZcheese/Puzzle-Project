@@ -92,9 +92,6 @@ public class Puzzle {
 	/*
 	 * to get the board of the puzzle returns the board
 	 */
-	// KZ's Comment: You don't need to comment getters and setters. I did not
-	// delete this because I thought you might want to keep it anyway, but it's
-	// unnecessary.
 	public Board getBoard() {
 		return board;
 	}
@@ -352,42 +349,6 @@ public class Puzzle {
 			solve(0, 0);
 		}
 	}
-
-	/*	public void solve(){
-		restart();
-		solve(0, 0);
-	}
-
-	private boolean solve(int row, int col){
-		if(isSolved()) return true;
-		if(board.isValid(row, col) == false) return true;
-		if(board.hasPiece(row, col)) return true;
-		boolean a = false;
-		boolean b = false;
-		Piece[] unusedCopy = new Piece[unused.size()];
-		for(int i = 0; i < unusedCopy.length; i++) unusedCopy[i] = unused.get(i);
-		for(int i = 0; i < unusedCopy.length; i++){
-			for(int j = 0; j < 3; j++){
-				unusedCopy[i].rotate();
-				if(doesFit(row, col, unusedCopy[i])){			
-					setPiece(row, col, unusedCopy[i]);
-					a = solve(row + 1, col);
-					b = solve(row, col + 1);
-			//		System.out.println(board.toString());
-					if(a && b) return true;
-				}
-			}
-			clearBranch(row, col);
-		}
-		return false;
-	}
-	
-	private void clearBranch(int row, int col){
-		for(int i = row; i < rows; i++)
-			for(int j = col; j < cols; j++)
-				removePiece(i, j);
-	}
-*/
 	// main method
 	public static void main(String[] args) {
 
