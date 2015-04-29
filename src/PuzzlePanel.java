@@ -1,4 +1,3 @@
-
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -283,6 +282,4 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 		}
 		repaint();
 	}
-
 }
->>>>>>> origin/master

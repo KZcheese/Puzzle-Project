@@ -89,24 +89,24 @@ public class Puzzle {
 		unused = new ArrayList<Piece>();
 	}
 
-	/*
-	 * @returns the board
+	/**
+	 * @return the board
 	 */
 	public Board getBoard() {
 		return board;
 	}
-	
-	/* 
-	 * @returns the rows of the puzzle
+
+	/**
+	 * @return the rows of the puzzle
 	 */
-	public int getRows(){
+	public int getRows() {
 		return rows;
 	}
-	
-	/* 
-	 * @returns the cols of the puzzle
+
+	/**
+	 * @return the cols of the puzzle
 	 */
-	public int getCols(){
+	public int getCols() {
 		return cols;
 	}
 
@@ -141,8 +141,8 @@ public class Puzzle {
 	}
 
 	/**
-	 * Checks if the row and column of the board is fit for
-	 * the specified piece at the specified side
+	 * Checks if the row and column of the board is fit for the specified piece
+	 * at the specified side
 	 * 
 	 * @param row
 	 *            = the row to fit in
@@ -221,9 +221,9 @@ public class Puzzle {
 	}
 
 	/*
-	 * to get piece at the specified tile of the board; parameters: row = the row
-	 * which the piece is in , col = the column which the piece is in, return
-	 * the piece at the tile of the board
+	 * to get piece at the specified tile of the board; parameters: row = the
+	 * row which the piece is in , col = the column which the piece is in,
+	 * return the piece at the tile of the board
 	 */
 	public Piece getPiece(int row, int col) {
 		return board.getPiece(row, col);
@@ -346,9 +346,9 @@ public class Puzzle {
 				col++;
 			pieces.remove(fitPiece);
 			solve(row, col, pieces);
-			solve(0, 0);
 		}
 	}
+
 	// main method
 	public static void main(String[] args) {
 
