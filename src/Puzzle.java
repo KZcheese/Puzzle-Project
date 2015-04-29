@@ -90,7 +90,7 @@ public class Puzzle {
 	}
 
 	/*
-	 * to get the board of the puzzle returns the board
+	 * @returns the board
 	 */
 	public Board getBoard() {
 		return board;
@@ -141,18 +141,18 @@ public class Puzzle {
 	}
 
 	/**
-	 * Checks if the piece at the specified row and column of the board matches
-	 * the specified piece in the specified direction.
+	 * Checks if the row and column of the board is fit for
+	 * the specified piece at the specified side
 	 * 
 	 * @param row
-	 *            = the row of the first piece being checked
+	 *            = the row to fit in
 	 * @param col
-	 *            = the row of the second piece being checked
+	 *            = the col to fit in
 	 * @param direction
-	 *            = the side which is being checked
+	 *            = the side being checked
 	 * @param piece
-	 *            = the second piece being checked
-	 * @return true if matched, or false if not
+	 *            = the piece being checked
+	 * @return true if fit, or false if not
 	 */
 	private boolean sideFit(int row, int col, int direction, Piece piece) {
 		if (direction == Piece.NORTH)
@@ -174,7 +174,7 @@ public class Puzzle {
 
 	/*
 	 * to check if each side of the piece fits in the specified tile of the
-	 * board parameters: row = the row which the piece to be in , col = the
+	 * board; parameters: row = the row which the piece to be in , col = the
 	 * column which the piece to be in, piece = the piece to fit in returns true
 	 * if fit, or false if not
 	 */
@@ -188,7 +188,7 @@ public class Puzzle {
 
 	/*
 	 * to check if puzzle is solved, that is, each tile has a piece and is
-	 * fitted returns true if solved, or false if not
+	 * fitted; return true if solved, or false if not
 	 */
 	public boolean isSolved() {
 		for (int i = 0; i < rows; i++) {
@@ -204,9 +204,9 @@ public class Puzzle {
 
 	/*
 	 * to set piece into the specified tile of the board and remove the piece
-	 * from unused list parameters: row = the row which the piece will be in ,
-	 * col = the column which the piece will be in, piece = the piece to set
-	 * returns the original piece at the tile of the board
+	 * from unused list; parameters: row = the row which the piece will be in,
+	 * col = the column which the piece will be in, piece = the piece to set,
+	 * return the original piece at the tile of the board
 	 */
 
 	public Piece setPiece(int row, int col, Piece piece) {
@@ -221,8 +221,8 @@ public class Puzzle {
 	}
 
 	/*
-	 * to get piece at the specified tile of the board parameters: row = the row
-	 * which the piece is in , col = the column which the piece is in, returns
+	 * to get piece at the specified tile of the board; parameters: row = the row
+	 * which the piece is in , col = the column which the piece is in, return
 	 * the piece at the tile of the board
 	 */
 	public Piece getPiece(int row, int col) {
@@ -231,8 +231,8 @@ public class Puzzle {
 
 	/*
 	 * to remove a piece from the specified tile of the board and add the piece
-	 * to unused list parameters: row = the row which the piece is in , col =
-	 * the column which the piece is in, returns the piece removed
+	 * to unused list; parameters: row = the row which the piece is in , col =
+	 * the column which the piece is in, return the piece removed
 	 */
 	public Piece removePiece(int row, int col) {
 		if (!board.isValid(row, col) || !board.hasPiece(row, col))
@@ -243,7 +243,7 @@ public class Puzzle {
 	}
 
 	/*
-	 * to add the piece to unused list piece = the piece to add
+	 * to add the piece to unused list; parameters: piece = the piece to add
 	 */
 	public void addPiece(Piece piece) {
 		unused.add(piece);
@@ -263,7 +263,7 @@ public class Puzzle {
 
 	/*
 	 * a toString method to convert the puzzle board into printable string
-	 * format returns a string value
+	 * format; return a string value
 	 */
 	public String toString() {
 		return board.toString();
@@ -281,7 +281,7 @@ public class Puzzle {
 	/*
 	 * Find a permutation of unused pieces (by Heap's algorithm), if the
 	 * permutation is a solution, done;Otherwise, reset board and try next
-	 * permutation until all permutations exhaustedparameters: pieces = the
+	 * permutation until all permutations exhausted; parameters: pieces = the
 	 * unused pieces, size = the number of unused pieces
 	 */
 	private void permuteToSolve(ArrayList<Piece> pieces, int size) {
@@ -314,7 +314,7 @@ public class Puzzle {
 
 	/*
 	 * Recursively solve row, col in the board to set fitted piece until no
-	 * fitted piece found or all pieces fitted parameters: row = the row which
+	 * fitted piece found or all pieces fitted; parameters: row = the row which
 	 * the piece to be in, col = the column which the piece to be in, pieces =
 	 * current unused pieces
 	 */
