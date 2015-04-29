@@ -98,6 +98,20 @@ public class Puzzle {
 	public Board getBoard() {
 		return board;
 	}
+	
+	/* 
+	 * @returns the rows of the puzzle
+	 */
+	public int getRows(){
+		return rows;
+	}
+	
+	/* 
+	 * @returns the cols of the puzzle
+	 */
+	public int getCols(){
+		return cols;
+	}
 
 	/**
 	 * 
