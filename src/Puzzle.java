@@ -339,56 +339,41 @@ public class Puzzle {
 		}
 	}
 
-	private boolean solve(int row, int col) {
-		if (isSolved() || board.isValid(row, col) == false
-				|| board.hasPiece(row, col))
-			return true;
+	/*	public void solve(){
+		restart();
+		solve(0, 0);
+	}
+
+	private boolean solve(int row, int col){
+		if(isSolved()) return true;
+		if(board.isValid(row, col) == false) return true;
+		if(board.hasPiece(row, col)) return true;
 		boolean a = false;
 		boolean b = false;
 		Piece[] unusedCopy = new Piece[unused.size()];
-		for (int i = 0; i < unusedCopy.length; i++)
-			unusedCopy[i] = unused.get(i);
-		for (int i = 0; i < unusedCopy.length; i++) {
-			for (int j = 0; j < 3; j++) {
+		for(int i = 0; i < unusedCopy.length; i++) unusedCopy[i] = unused.get(i);
+		for(int i = 0; i < unusedCopy.length; i++){
+			for(int j = 0; j < 3; j++){
 				unusedCopy[i].rotate();
-				if (doesFit(row, col, unusedCopy[i])) {
+				if(doesFit(row, col, unusedCopy[i])){			
 					setPiece(row, col, unusedCopy[i]);
 					a = solve(row + 1, col);
 					b = solve(row, col + 1);
-					// System.out.println(board.toString());
-					if (a && b)
-						return true;
+			//		System.out.println(board.toString());
+					if(a && b) return true;
 				}
-				// unusedCopy[i].rotate();
 			}
 			clearBranch(row, col);
 		}
 		return false;
 	}
-
-	/*
-	 * public void solve(){ restart(); solve(0, 0); }
-	 * 
-	 * private boolean solve(int row, int col){ if(isSolved()) return true;
-	 * if(board.isValid(row, col) == false) return true; if(board.hasPiece(row,
-	 * col)) return true; boolean a = false; boolean b = false; Piece[]
-	 * unusedCopy = new Piece[unused.size()]; for(int i = 0; i <
-	 * unusedCopy.length; i++) unusedCopy[i] = unused.get(i); for(int i = 0; i <
-	 * unusedCopy.length; i++){ for(int j = 0; j < 3; j++){
-	 * unusedCopy[i].rotate(); if(doesFit(row, col, unusedCopy[i])){
-	 * setPiece(row, col, unusedCopy[i]); a = solve(row + 1, col); b =
-	 * solve(row, col + 1); // System.out.println(board.toString()); if(a && b)
-	 * return true; } } clearBranch(row, col); } return false; ======= private
-	 * void clearBranch(int row, int col) { for (int i = row; i < rows; i++) for
-	 * (int j = col; j < cols; j++) removePiece(i, j); }
-	 * 
-	 * public void restart() { for (int i = 0; i < rows; i++) for (int j = 0; j
-	 * < cols; j++) if (board.hasPiece(i, j) == true) removePiece(i, j); >>>>>>>
-	 * origin/master }
-	 * 
-	 * private void clearBranch(int row, int col){ for(int i = row; i < rows;
-	 * i++) for(int j = col; j < cols; j++) removePiece(i, j); }
-	 */
+	
+	private void clearBranch(int row, int col){
+		for(int i = row; i < rows; i++)
+			for(int j = col; j < cols; j++)
+				removePiece(i, j);
+	}
+*/
 	// main method
 	public static void main(String[] args) {
 
