@@ -256,7 +256,7 @@ public class Puzzle {
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
 				if (board.hasPiece(i, j))
-					unused.add(board.getPiece(i, j));
+					unused.add(board.removePiece(i, j));
 			}
 		}
 	}

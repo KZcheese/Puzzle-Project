@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class PuzzlePanel extends JPanel implements MouseListener,
 		MouseMotionListener, MouseWheelListener {
-	private boolean isSolved = false;
 	private static final int H_OUT = Piece.HEARTS_OUT, H_IN = Piece.HEARTS_IN,
 			C_OUT = Piece.CLUBS_OUT, C_IN = Piece.CLUBS_IN,
 			D_IN = Piece.DIAMONDS_IN, D_OUT = Piece.DIAMONDS_OUT,
@@ -65,7 +64,6 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 
 	public void solve() {
 		pu.solve();
-		isSolved = true;
 		repaint();
 	}
 
@@ -161,8 +159,6 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		if (isSolved)
-			return;
 		// System.out.println("rotate");
 		int rotated = e.getWheelRotation();
 		// System.out.println(rotated);
