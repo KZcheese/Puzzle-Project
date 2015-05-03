@@ -1,5 +1,15 @@
 import java.awt.image.BufferedImage;
 
+/**
+ * An extension of Piece that also holds X and Y coordinates, along with an
+ * image and a boolean isAttached, which is used by the PuzzlePanel class to
+ * detect whether or not the object is being moved by the user.
+ * 
+ * @author Robert Colley
+ * @author Kevin Zhan
+ * @author Amy Liu
+ *
+ */
 public class PieceComponent extends Piece {
 
 	private BufferedImage image;

@@ -10,6 +10,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
+ * A Frame used to hold all functions used in a 3x3 jigsaw puzzle with a
+ * specific set of pieces. Contains a PuzzlePanel object used to display and
+ * interact with the puzzle's board and pieces. Contains Buttons that Reset and
+ * Solve the puzzle, and a button that opens a separate window with
+ * instructions.
+ * 
  * @author Kevin Zhan
  * @author Robert Colley
  * @author Amy Liu
@@ -56,9 +62,8 @@ public class Frame extends JFrame {
 
 	}
 
-	/*
-	 * This class dictates the actions of the "reset" button and constructs the
-	 * listener
+	/**
+	 * Dictates the actions of the "reset" button and constructs the listener
 	 */
 	class ResetButtonListener implements ActionListener {
 
@@ -73,9 +78,8 @@ public class Frame extends JFrame {
 		}
 	}
 
-	/*
-	 * This class dictates the actions of the "solve" button and constructs the
-	 * listener
+	/**
+	 * Dictates the actions of the "solve" button and constructs the listener
 	 */
 	class SolveButtonListener implements ActionListener {
 
@@ -85,9 +89,9 @@ public class Frame extends JFrame {
 		}
 	}
 
-	/*
-	 * This class dictates the actions of the "instructions" button and
-	 * constructs the listener
+	/**
+	 * Dictates the actions of the "instructions" button and constructs the
+	 * listener
 	 */
 	class InstructionsButtonListener implements ActionListener {
 		private JFrame f;
@@ -109,7 +113,7 @@ public class Frame extends JFrame {
 									+ "A piece that does not fit will remain attached to the mouse\n"
 									+ "until it goes outside the board or in a place where it fits."
 									+ "\n\n\nGUI made by Robert Colley, Kevin Zhan, and Amy Liu.\n"
-									+ "Puzzle Engine created by ___________ and ____________.",
+									+ "Puzzle Internals created by Kevin Ma and Kaitlyn Li.",
 							"Instructions", JOptionPane.PLAIN_MESSAGE);
 		}
 	}
