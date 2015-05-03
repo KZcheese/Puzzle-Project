@@ -260,11 +260,12 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 							if (pu.doesFit(i, j, p)) {
 								unusedPieceComponents.remove(p);
 								usedPieceComponents.add(p);
+								p.setPos(j, i);
 							}
 							PieceComponent pTemp = (PieceComponent) pu
 									.setPiece(i, j, p);
-
 							if (pTemp != null) {
+								pTemp.setPos(-1, -1);
 								usedPieceComponents.remove(pTemp);
 								unusedPieceComponents.add(pTemp);
 							}
@@ -274,6 +275,7 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 				}
 			}
 		}
+		boolean isSet = false;
 		for (int k = 0; k < usedPieceComponents.size(); k++) {
 			PieceComponent p = usedPieceComponents.get(k);
 			if (p.isAttached()) {
@@ -288,15 +290,24 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 								&& y < yPos + PIECE_SIZE) {
 							if (pu.doesFit(i, j, p)) {
 								pu.removePiece(i, j);
+								p.setPos(j, i);
 							}
 							PieceComponent pTemp = (PieceComponent) pu
 									.setPiece(i, j, p);
 							if (pTemp != null) {
+								pTemp.setPos(-1, -1);
 								usedPieceComponents.remove(pTemp);
 								unusedPieceComponents.add(pTemp);
 							}
+							isSet = true;
 							break;
 						}
+					}
+					if (!isSet) {
+						pu.removePiece(p.getRow(), p.getCol());
+						usedPieceComponents.remove(p);
+						unusedPieceComponents.add(p);
+						p.setPos(-1, -1);
 					}
 				}
 			}

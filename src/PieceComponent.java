@@ -16,6 +16,24 @@ public class PieceComponent extends Piece {
 	private int x;
 	private int y;
 	private boolean attached;
+	private int row = -1;
+	private int col = -1;
+
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public int getCol() {
+		return col;
+	}
+
+	public void setCol(int col) {
+		this.col = col;
+	}
 
 	public PieceComponent(int north, int east, int south, int west,
 			BufferedImage image, int x, int y) {
@@ -74,6 +92,11 @@ public class PieceComponent extends Piece {
 
 	public void setY(int y) {
 		this.y = y;
+	}
+
+	public void setPos(int row, int col) {
+		this.row = row;
+		this.col = col;
 	}
 
 	public boolean isAttached() {
