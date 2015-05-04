@@ -56,6 +56,7 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 			new PieceComponent(C_OUT, C_IN, D_IN, D_OUT, ImageIO.read(new File(
 					"img/piece_9.png"))) };
 
+	private boolean isSolved = false;
 	private ArrayList<PieceComponent> unusedPieceComponents = new ArrayList<PieceComponent>();
 	private ArrayList<PieceComponent> usedPieceComponents = new ArrayList<PieceComponent>();
 
@@ -93,6 +94,7 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 		for (Piece p : temp) {
 			unusedPieceComponents.add((PieceComponent) p);
 		}
+		isSolved = true;
 		repaint();
 	}
 
@@ -111,6 +113,7 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 			Piece p = temp.get(i);
 			unusedPieceComponents.add((PieceComponent) p);
 		}
+		isSolved = false;
 		repaint();
 	}
 
@@ -174,6 +177,8 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	 */
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
+		if (isSolved)
+			return;
 		// System.out.println("rotate");
 		int rotated = e.getWheelRotation();
 		// System.out.println(rotated);
@@ -193,6 +198,8 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	 */
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		if (isSolved)
+			return;
 		// System.out.println("drag");
 		int mouseX = e.getX();
 		int mouseY = e.getY();
@@ -225,6 +232,8 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
+		if (isSolved)
+			return;
 		// System.out.println("pressed");
 		int mouseX = e.getX();
 		int mouseY = e.getY();
@@ -264,6 +273,8 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		if (isSolved)
+			return;
 		// System.out.println("released");
 		int x = e.getX();
 		int y = e.getY();
@@ -304,7 +315,6 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 							// System.out.println("puzzle board \n"
 							// + pu.getBoard().toString());
 							// System.out.println("");
-
 							break;
 						}
 					}
