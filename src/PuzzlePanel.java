@@ -216,20 +216,26 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 		ArrayList<PieceComponent> clicked = new ArrayList<PieceComponent>();
 		for (int i = 0; i < unusedPieceComponents.size(); i++) {
 			PieceComponent p = unusedPieceComponents.get(i);
-			if (p.getX() + 23 < mouseX && p.getX() + PIECE_SIZE > mouseX
-					&& p.getY() + 23 < mouseY && p.getY() + PIECE_SIZE > mouseY) {
+			if (p.getX() + 23 < mouseX && p.getX() + PIECE_SIZE + 23 > mouseX
+					&& p.getY() + 23 < mouseY && p.getY() + PIECE_SIZE + 23 > mouseY) {
 				p.setAttached(true);
 				clicked.add(p);
+
 			}
+
 		}
-		while (clicked.size() > 1)
+		while (clicked.size() > 1){
 			clicked.get(0).setAttached(false);
+			clicked.remove(0);
+		}
 		for (int i = 0; i < usedPieceComponents.size(); i++) {
 			PieceComponent p = usedPieceComponents.get(i);
-			if (p.getX() + 23 < mouseX && p.getX() + PIECE_SIZE > mouseX
-					&& p.getY() + 23 < mouseY && p.getY() + PIECE_SIZE > mouseY)
+			if (p.getX() + 23 < mouseX && p.getX() + PIECE_SIZE + 23 > mouseX
+					&& p.getY() + 23 < mouseY && p.getY() + PIECE_SIZE + 23 > mouseY)
 				p.setAttached(true);
+
 		}
+
 	}
 
 	/**
