@@ -57,7 +57,7 @@ public class Board {
 		return old;
 	}
 
-`	/* to remove a piece from a tile of the board
+	/* to remove a piece from a tile of the board
 	 * parameter: row = the row the piece is in, col = the column the piece is in
 	 * returns the piece that was previously on the tile
 	 */
