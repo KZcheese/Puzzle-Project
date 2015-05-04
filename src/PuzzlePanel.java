@@ -29,7 +29,7 @@ import javax.swing.JPanel;
  */
 @SuppressWarnings("serial")
 public class PuzzlePanel extends JPanel implements MouseListener,
-MouseMotionListener, MouseWheelListener {
+		MouseMotionListener, MouseWheelListener {
 	private static final int H_OUT = Piece.HEARTS_OUT, H_IN = Piece.HEARTS_IN,
 			C_OUT = Piece.CLUBS_OUT, C_IN = Piece.CLUBS_IN,
 			D_IN = Piece.DIAMONDS_IN, D_OUT = Piece.DIAMONDS_OUT,
@@ -39,22 +39,22 @@ MouseMotionListener, MouseWheelListener {
 	private PieceComponent[] pieces = {
 			new PieceComponent(C_OUT, H_OUT, D_IN, S_IN, ImageIO.read(new File(
 					"img/piece_1.png"))),
-					new PieceComponent(S_OUT, D_OUT, S_IN, H_IN, ImageIO.read(new File(
-							"img/piece_2.png"))),
-							new PieceComponent(H_OUT, S_OUT, S_IN, C_OUT,
-									ImageIO.read(new File("img/piece_3.png"))),
-									new PieceComponent(H_OUT, D_OUT, S_IN, S_IN, ImageIO.read(new File(
-											"img/piece_4.png"))),
-											new PieceComponent(S_OUT, S_OUT, H_IN, S_IN, ImageIO.read(new File(
-													"img/piece_5.png"))),
-													new PieceComponent(H_OUT, D_OUT, D_IN, H_IN, ImageIO.read(new File(
-															"img/piece_6.png"))),
-															new PieceComponent(S_OUT, D_OUT, H_IN, D_IN, ImageIO.read(new File(
-																	"img/piece_7.png"))),
-																	new PieceComponent(C_OUT, H_OUT, S_IN, H_IN, ImageIO.read(new File(
-																			"img/piece_8.png"))),
-																			new PieceComponent(C_OUT, C_IN, D_IN, D_OUT, ImageIO.read(new File(
-																					"img/piece_9.png"))) };
+			new PieceComponent(S_OUT, D_OUT, S_IN, H_IN, ImageIO.read(new File(
+					"img/piece_2.png"))),
+			new PieceComponent(H_OUT, S_OUT, S_IN, C_OUT,
+					ImageIO.read(new File("img/piece_3.png"))),
+			new PieceComponent(H_OUT, D_OUT, S_IN, S_IN, ImageIO.read(new File(
+					"img/piece_4.png"))),
+			new PieceComponent(S_OUT, S_OUT, H_IN, S_IN, ImageIO.read(new File(
+					"img/piece_5.png"))),
+			new PieceComponent(H_OUT, D_OUT, D_IN, H_IN, ImageIO.read(new File(
+					"img/piece_6.png"))),
+			new PieceComponent(S_OUT, D_OUT, H_IN, D_IN, ImageIO.read(new File(
+					"img/piece_7.png"))),
+			new PieceComponent(C_OUT, H_OUT, S_IN, H_IN, ImageIO.read(new File(
+					"img/piece_8.png"))),
+			new PieceComponent(C_OUT, C_IN, D_IN, D_OUT, ImageIO.read(new File(
+					"img/piece_9.png"))) };
 
 	private ArrayList<PieceComponent> unusedPieceComponents = new ArrayList<PieceComponent>();
 	private ArrayList<PieceComponent> usedPieceComponents = new ArrayList<PieceComponent>();
@@ -78,6 +78,21 @@ MouseMotionListener, MouseWheelListener {
 	 */
 	public void solve() {
 		pu.solve();
+		usedPieceComponents = new ArrayList<PieceComponent>();
+		for (int i = 0; i < pu.getCols(); i++) {
+			for (int j = 0; j < pu.getRows(); j++) {
+				PieceComponent p = (PieceComponent) pu.getPiece(i, j);
+				if (p != null) {
+					p.setPos(j, i);
+					usedPieceComponents.add(p);
+				}
+			}
+		}
+		unusedPieceComponents = new ArrayList<PieceComponent>();
+		ArrayList<Piece> temp = pu.getUnusedPieces();
+		for (Piece p : temp) {
+			unusedPieceComponents.add((PieceComponent) p);
+		}
 		repaint();
 	}
 
@@ -217,21 +232,23 @@ MouseMotionListener, MouseWheelListener {
 		for (int i = 0; i < unusedPieceComponents.size(); i++) {
 			PieceComponent p = unusedPieceComponents.get(i);
 			if (p.getX() + 23 < mouseX && p.getX() + PIECE_SIZE + 23 > mouseX
-					&& p.getY() + 23 < mouseY && p.getY() + PIECE_SIZE + 23 > mouseY) {
+					&& p.getY() + 23 < mouseY
+					&& p.getY() + PIECE_SIZE + 23 > mouseY) {
 				p.setAttached(true);
 				clicked.add(p);
 
 			}
 
 		}
-		while (clicked.size() > 1){
+		while (clicked.size() > 1) {
 			clicked.get(0).setAttached(false);
 			clicked.remove(0);
 		}
 		for (int i = 0; i < usedPieceComponents.size(); i++) {
 			PieceComponent p = usedPieceComponents.get(i);
 			if (p.getX() + 23 < mouseX && p.getX() + PIECE_SIZE + 23 > mouseX
-					&& p.getY() + 23 < mouseY && p.getY() + PIECE_SIZE + 23 > mouseY)
+					&& p.getY() + 23 < mouseY
+					&& p.getY() + PIECE_SIZE + 23 > mouseY)
 				p.setAttached(true);
 		}
 
@@ -265,26 +282,28 @@ MouseMotionListener, MouseWheelListener {
 							if (pu.doesFit(j, i, p)) {
 								unusedPieceComponents.remove(p);
 								usedPieceComponents.add(p);
-								p.setPos(j,i);//swapped
+								p.setPos(j, i);// swapped
 								PieceComponent pTemp = (PieceComponent) pu
 										.setPiece(j, i, p);
-								//								pu.setPiece(i, j, p);//added
-								pu.getUnusedPieces().remove(p);//added
+								// pu.setPiece(i, j, p);//added
+								pu.getUnusedPieces().remove(p);// added
 
 								if (pTemp != null && pTemp != p) {
 									pTemp.setPos(-1, -1);
 									usedPieceComponents.remove(pTemp);
 									unusedPieceComponents.add(pTemp);
-									pu.addPiece(pTemp);//added
+									pu.addPiece(pTemp);// added
 								}
 
 							}
-							System.out.println("unused" + unusedPieceComponents);
+							System.out
+									.println("unused" + unusedPieceComponents);
 							System.out.println("used" + usedPieceComponents);
-							System.out.println ( "unused puzzle" + pu.getUnusedPieces());
-							System.out.println("puzzle board \n" + pu.getBoard().toString());
+							System.out.println("unused puzzle"
+									+ pu.getUnusedPieces());
+							System.out.println("puzzle board \n"
+									+ pu.getBoard().toString());
 							System.out.println("");
-
 
 							break;
 						}
@@ -306,15 +325,19 @@ MouseMotionListener, MouseWheelListener {
 								+ getHeight() / 2 - 50;
 						if (x > xPos && x < xPos + PIECE_SIZE && y > yPos
 								&& y < yPos + PIECE_SIZE) {
-							System.out.println("p.getRow"+ p.getRow()+ "p.getCol" +p.getCol());
+							System.out.println("p.getRow" + p.getRow()
+									+ "p.getCol" + p.getCol());
 							pu.removePiece(p.getRow(), p.getCol());
-							System.out.println("puzzle board removed \n" + pu.getBoard().toString());
-							System.out.println("before doesfit j/row is " + j + "i/col is " +i);
+							System.out.println("puzzle board removed \n"
+									+ pu.getBoard().toString());
+							System.out.println("before doesfit j/row is " + j
+									+ "i/col is " + i);
 
 							if (pu.doesFit(j, i, p)) {
 								pu.removePiece(p.getRow(), p.getCol());
-								p.setPos(j, i);//swapped
-								System.out.println("j/row is " + j + "i/col is " +i);
+								p.setPos(j, i);// swapped
+								System.out.println("j/row is " + j
+										+ "i/col is " + i);
 								PieceComponent pTemp = (PieceComponent) pu
 										.setPiece(j, i, p);
 								if (pTemp != null && pTemp != p) {
@@ -324,10 +347,14 @@ MouseMotionListener, MouseWheelListener {
 									pu.addPiece(pTemp);
 								}
 								isSet = true;
-								System.out.println("unused1" + unusedPieceComponents);
-								System.out.println("used1" + usedPieceComponents);
-								System.out.println ( "unused puzzle1" + pu.getUnusedPieces());
-								System.out.println("puzzle board1 \n" + pu.getBoard().toString());
+								System.out.println("unused1"
+										+ unusedPieceComponents);
+								System.out.println("used1"
+										+ usedPieceComponents);
+								System.out.println("unused puzzle1"
+										+ pu.getUnusedPieces());
+								System.out.println("puzzle board1 \n"
+										+ pu.getBoard().toString());
 								System.out.println("");
 
 								break;
@@ -338,8 +365,10 @@ MouseMotionListener, MouseWheelListener {
 								usedPieceComponents.remove(p);
 								unusedPieceComponents.add(p);
 								p.setPos(-1, -1);
-								System.out.println("unused2" + unusedPieceComponents);
-								System.out.println("used2" + usedPieceComponents);
+								System.out.println("unused2"
+										+ unusedPieceComponents);
+								System.out.println("used2"
+										+ usedPieceComponents);
 							}
 						}
 					}
@@ -349,7 +378,7 @@ MouseMotionListener, MouseWheelListener {
 		}
 		System.out.println("unused3" + unusedPieceComponents);
 		System.out.println("used3" + usedPieceComponents);
-		System.out.println ( "unused puzzle1" + pu.getUnusedPieces());
+		System.out.println("unused puzzle1" + pu.getUnusedPieces());
 		System.out.println("puzzle board1 \n" + pu.getBoard().toString());
 		System.out.println("");
 
