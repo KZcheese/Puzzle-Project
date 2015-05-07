@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -8,6 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.EmptyBorder;
 
 /**
  * A Frame used to hold all functions used in a 3x3 jigsaw puzzle with a
@@ -27,6 +31,8 @@ public class Frame extends JFrame {
 	private JButton reset = new JButton("Reset");
 	private JButton instructions = new JButton("Instructions");
 	private JButton solve = new JButton("Solve");
+	private Dimension buttonSize = new Dimension(100, 40);
+	private Font buttonFont = new Font("Tahoma", Font.PLAIN, 20);
 
 	public Frame() throws IOException {
 
@@ -47,11 +53,16 @@ public class Frame extends JFrame {
 
 		ActionListener forInstructions = new InstructionsButtonListener(this);
 		instructions.addActionListener(forInstructions);
-
+		reset.setSize(buttonSize);
+		reset.setFont(buttonFont);
+		instructions.setSize(buttonSize);
+		instructions.setFont(buttonFont);
+		solve.setFont(buttonFont);
+		solve.setSize(buttonSize);
 		toolbar.add(reset);
 		toolbar.add(instructions);
 		toolbar.add(solve);
-
+		toolbar.setBorder(new EmptyBorder(10, 0, 0, 0));
 		this.setLayout(new BorderLayout()); // best layout?
 		this.add(p, BorderLayout.CENTER);
 
@@ -118,7 +129,10 @@ public class Frame extends JFrame {
 		}
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException,
+			ClassNotFoundException, InstantiationException,
+			IllegalAccessException, UnsupportedLookAndFeelException {
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		new Frame();
 	}
 }
