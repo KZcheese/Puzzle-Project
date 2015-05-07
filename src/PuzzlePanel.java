@@ -37,15 +37,15 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	private static final int PIECE_SIZE = 70, PIECE_SIZE_EDGE = 118;
 	private Puzzle pu;
 	private PieceComponent[] pieces = {
-			new PieceComponent(C_OUT, H_OUT, D_IN, S_IN, ImageIO.read(new File(
+			new PieceComponent(C_OUT, H_OUT, D_IN, C_IN, ImageIO.read(new File(
 					"img/piece_1.png"))),
 			new PieceComponent(S_OUT, D_OUT, S_IN, H_IN, ImageIO.read(new File(
 					"img/piece_2.png"))),
 			new PieceComponent(H_OUT, S_OUT, S_IN, C_OUT,
 					ImageIO.read(new File("img/piece_3.png"))),
-			new PieceComponent(H_OUT, D_OUT, S_IN, S_IN, ImageIO.read(new File(
+			new PieceComponent(H_OUT, D_OUT, C_IN, C_IN, ImageIO.read(new File(
 					"img/piece_4.png"))),
-			new PieceComponent(S_OUT, S_OUT, H_IN, S_IN, ImageIO.read(new File(
+			new PieceComponent(S_OUT, S_OUT, H_IN, C_IN, ImageIO.read(new File(
 					"img/piece_5.png"))),
 			new PieceComponent(H_OUT, D_OUT, D_IN, H_IN, ImageIO.read(new File(
 					"img/piece_6.png"))),
