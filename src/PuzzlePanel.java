@@ -183,8 +183,9 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 		int rotated = e.getWheelRotation();
 		// System.out.println(rotated);
 		for (PieceComponent p : unusedPieceComponents)
-			if (p.isAttached())
+			if (p.isAttached()){
 				p.rotate(rotated);
+			}
 		for (PieceComponent p : usedPieceComponents)
 			if (p.isAttached())
 				p.rotate(rotated);
@@ -327,6 +328,7 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 			PieceComponent p = usedPieceComponents.get(k);
 			if (p.isAttached()) {
 				p.setAttached(false);
+				int orient = p.getOrientation();
 				for (int i = 0; i < pu.getCols(); i++) {
 					for (int j = 0; j < pu.getRows(); j++) {
 						int xPos = (i - pu.getCols() / 2) * PIECE_SIZE
@@ -384,6 +386,8 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 					usedPieceComponents.remove(p);
 					unusedPieceComponents.add(p);
 					p.setPos(-1, -1);
+					while (p.getOrientation() != orient)
+						p.rotate();
 					// System.out.println("unused2"
 					// + unusedPieceComponents);
 					// System.out.println("used2"

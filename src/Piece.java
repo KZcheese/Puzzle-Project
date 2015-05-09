@@ -74,6 +74,7 @@ public class Piece {
 			sides[i] = sides[i - 1];
 		sides[NORTH] = newNorth;
 		orientation++;
+		orientation %= 4;
 
 	}
 
@@ -86,6 +87,7 @@ public class Piece {
 			sides[i] = sides[i + 1];
 		sides[WEST] = newWest;
 		orientation--;
+		orientation %= 4;
 	}
 
 	/*
