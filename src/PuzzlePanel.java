@@ -369,6 +369,12 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 								// System.out.println("");
 								break;
 							}
+							else { //amy added 5/9
+								usedPieceComponents.remove(p);
+								unusedPieceComponents.add(p);
+//								 System.out.println("IS THIS BUG FIXED \n"
+//										 + pu.getBoard().toString());
+							}
 						}
 
 					}
