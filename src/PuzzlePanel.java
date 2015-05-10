@@ -75,7 +75,7 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	}
 
 	/**
-	 * Delegates to the solve() method in Puzzle
+	 * Calls solve() in Puzzle and then syncs the GUI to Puzzle
 	 */
 	public void solve() {
 		pu.solve();
@@ -99,7 +99,7 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	}
 
 	/**
-	 * Calls the restart() method in Puzzle and resets all pieces to their
+	 * Calls restart() in Puzzle and resets all pieces to their
 	 * starting positions.
 	 * 
 	 * @throws IOException
@@ -117,6 +117,9 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 		repaint();
 	}
 
+	/**
+	 * Draws all Puzzle pieces and the board. Automatically sets x and y coordinates for all pieces that are not attached to the mouse.
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
@@ -328,7 +331,6 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 			PieceComponent p = usedPieceComponents.get(k);
 			if (p.isAttached()) {
 				p.setAttached(false);
-				int orient = p.getOrientation();
 				for (int i = 0; i < pu.getCols(); i++) {
 					for (int j = 0; j < pu.getRows(); j++) {
 						int xPos = (i - pu.getCols() / 2) * PIECE_SIZE
@@ -386,8 +388,6 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 					usedPieceComponents.remove(p);
 					unusedPieceComponents.add(p);
 					p.setPos(-1, -1);
-					while (p.getOrientation() != orient)
-						p.rotate();
 					// System.out.println("unused2"
 					// + unusedPieceComponents);
 					// System.out.println("used2"
