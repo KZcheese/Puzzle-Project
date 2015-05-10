@@ -129,6 +129,16 @@ public class Frame extends JFrame {
 		}
 	}
 
+	/**
+	 * Sets LookandFeel to system and starts the game by instantiating Frame.
+	 * 
+	 * @param args
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws UnsupportedLookAndFeelException
+	 */
 	public static void main(String[] args) throws IOException,
 			ClassNotFoundException, InstantiationException,
 			IllegalAccessException, UnsupportedLookAndFeelException {
