@@ -1,7 +1,10 @@
-/*Purpose: to make a puzzle piece. A piece has 4 sides, each side could have one of 8 edges.
- * User can rotate the piece to change orientation. 
- * Written: 04/10/15
- * by Kaitlyn Li, Kevin Ma
+/**
+ * Purpose: to make a puzzle piece. A piece has 4 sides, each side could have
+ * one of 8 edges. User can rotate the piece to change orientation. Written:
+ * 04/10/15
+ * 
+ * @author Kaitlyn Li
+ * @author Kevin Ma
  */
 public class Piece {
 
