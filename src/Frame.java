@@ -36,14 +36,11 @@ public class Frame extends JFrame {
 
 	public Frame() throws IOException {
 
-		// this.getContentPane().setPreferredSize(new Dimension(500, 550));
 		this.setPreferredSize(new Dimension(500, 500));
 		this.setMinimumSize(new Dimension(500, 550));
 
 		this.setTitle("Puzzle");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-		// PuzzlePanel p = new PuzzlePanel();
 
 		ActionListener forSolve = new SolveButtonListener();
 		solve.addActionListener(forSolve);
@@ -63,9 +60,8 @@ public class Frame extends JFrame {
 		toolbar.add(instructions);
 		toolbar.add(solve);
 		toolbar.setBorder(new EmptyBorder(10, 0, 0, 0));
-		this.setLayout(new BorderLayout()); // best layout?
+		this.setLayout(new BorderLayout());
 		this.add(p, BorderLayout.CENTER);
-
 		this.getContentPane().add(toolbar, BorderLayout.NORTH);
 		this.getContentPane().add(p, BorderLayout.CENTER);
 		this.pack();

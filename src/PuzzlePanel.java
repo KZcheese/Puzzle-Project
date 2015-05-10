@@ -91,9 +91,8 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 		}
 		unusedPieceComponents = new ArrayList<PieceComponent>();
 		ArrayList<Piece> temp = pu.getUnusedPieces();
-		for (Piece p : temp) {
+		for (Piece p : temp)
 			unusedPieceComponents.add((PieceComponent) p);
-		}
 		isSolved = true;
 		repaint();
 	}
@@ -125,12 +124,8 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		// System.out.println("puzzlepaint");
 		for (int i = 0; i < pu.getCols(); i++) {
 			for (int j = 0; j < pu.getRows(); j++) {
-				// if (pu.getPiece() == null)
-				// System.out.println((i - pu.getCols() / 2 - 50) * PIECE_SIZE
-				// + getWidth() / 2);
 				int xPos = (i - pu.getCols() / 2) * PIECE_SIZE + getWidth() / 2
 						- 50;
 				int yPos = (j - pu.getRows() / 2) * PIECE_SIZE + getHeight()
@@ -167,7 +162,6 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 					AffineTransformOp.TYPE_BILINEAR);
 			g2d.drawImage(op.filter((BufferedImage) p.getImage(), null),
 					p.getX(), p.getY(), null);
-			// g2d.drawImage(p.getImage(), p.getX(), p.getY(), null);
 		}
 	}
 
@@ -182,13 +176,10 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		if (isSolved)
 			return;
-		// System.out.println("rotate");
 		int rotated = e.getWheelRotation();
-		// System.out.println(rotated);
 		for (PieceComponent p : unusedPieceComponents)
-			if (p.isAttached()){
+			if (p.isAttached())
 				p.rotate(rotated);
-			}
 		for (PieceComponent p : usedPieceComponents)
 			if (p.isAttached())
 				p.rotate(rotated);
@@ -204,7 +195,6 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	public void mouseDragged(MouseEvent e) {
 		if (isSolved)
 			return;
-		// System.out.println("drag");
 		int mouseX = e.getX();
 		int mouseY = e.getY();
 		for (int i = 0; i < unusedPieceComponents.size(); i++) {
@@ -238,7 +228,6 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	public void mousePressed(MouseEvent e) {
 		if (isSolved)
 			return;
-		// System.out.println("pressed");
 		int mouseX = e.getX();
 		int mouseY = e.getY();
 		ArrayList<PieceComponent> clicked = new ArrayList<PieceComponent>();
@@ -249,9 +238,7 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 					&& p.getY() + PIECE_SIZE + 23 > mouseY) {
 				p.setAttached(true);
 				clicked.add(p);
-
 			}
-
 		}
 		while (clicked.size() > 1) {
 			clicked.get(0).setAttached(false);
@@ -264,7 +251,6 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 					&& p.getY() + PIECE_SIZE + 23 > mouseY)
 				p.setAttached(true);
 		}
-
 	}
 
 	/**
@@ -279,7 +265,6 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 	public void mouseReleased(MouseEvent e) {
 		if (isSolved)
 			return;
-		// System.out.println("released");
 		int x = e.getX();
 		int y = e.getY();
 		for (int k = 0; k < unusedPieceComponents.size(); k++) {
@@ -297,28 +282,18 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 							if (pu.doesFit(j, i, p)) {
 								unusedPieceComponents.remove(p);
 								usedPieceComponents.add(p);
-								p.setPos(j, i);// swapped
+								p.setPos(j, i);
 								PieceComponent pTemp = (PieceComponent) pu
 										.setPiece(j, i, p);
-								// pu.setPiece(i, j, p);//added
-								pu.getUnusedPieces().remove(p);// added
+								pu.getUnusedPieces().remove(p);
 
 								if (pTemp != null && pTemp != p) {
 									pTemp.setPos(-1, -1);
 									usedPieceComponents.remove(pTemp);
 									unusedPieceComponents.add(pTemp);
-									pu.addPiece(pTemp);// added
+									pu.addPiece(pTemp);
 								}
-
 							}
-							// System.out
-							// .println("unused" + unusedPieceComponents);
-							// System.out.println("used" + usedPieceComponents);
-							// System.out.println("unused puzzle"
-							// + pu.getUnusedPieces());
-							// System.out.println("puzzle board \n"
-							// + pu.getBoard().toString());
-							// System.out.println("");
 							break;
 						}
 					}
@@ -340,20 +315,10 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 						if (x > xPos && x < xPos + PIECE_SIZE && y > yPos
 								&& y < yPos + PIECE_SIZE) {
 							isSet = true;
-
-							// System.out.println("p.getRow" + p.getRow()
-							// + "p.getCol" + p.getCol());
 							pu.removePiece(p.getRow(), p.getCol());
-							// System.out.println("puzzle board removed \n"
-							// + pu.getBoard().toString());
-							// System.out.println("before doesfit j/row is " + j
-							// + "i/col is " + i);
-
 							if (pu.doesFit(j, i, p)) {
 								pu.removePiece(p.getRow(), p.getCol());
-								p.setPos(j, i);// swapped
-								// System.out.println("j/row is " + j
-								// + "i/col is " + i);
+								p.setPos(j, i);
 								PieceComponent pTemp = (PieceComponent) pu
 										.setPiece(j, i, p);
 								if (pTemp != null && pTemp != p) {
@@ -362,22 +327,11 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 									unusedPieceComponents.add(pTemp);
 									pu.addPiece(pTemp);
 								}
-								// System.out.println("unused1"
-								// + unusedPieceComponents);
-								// System.out.println("used1"
-								// + usedPieceComponents);
-								// System.out.println("unused puzzle1"
-								// + pu.getUnusedPieces());
-								// System.out.println("puzzle board1 \n"
-								// + pu.getBoard().toString());
-								// System.out.println("");
 								break;
 							}
-							else { //amy added 5/9
+							else {
 								usedPieceComponents.remove(p);
 								unusedPieceComponents.add(p);
-//								 System.out.println("IS THIS BUG FIXED \n"
-//										 + pu.getBoard().toString());
 							}
 						}
 
@@ -388,19 +342,10 @@ public class PuzzlePanel extends JPanel implements MouseListener,
 					usedPieceComponents.remove(p);
 					unusedPieceComponents.add(p);
 					p.setPos(-1, -1);
-					// System.out.println("unused2"
-					// + unusedPieceComponents);
-					// System.out.println("used2"
-					// + usedPieceComponents);
 				}
 			}
 
 		}
-		// System.out.println("unused3" + unusedPieceComponents);
-		// System.out.println("used3" + usedPieceComponents);
-		// System.out.println("unused puzzle1" + pu.getUnusedPieces());
-		// System.out.println("puzzle board1 \n" + pu.getBoard().toString());
-		// System.out.println("");
 		repaint();
 	}
 
